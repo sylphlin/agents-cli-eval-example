@@ -12,7 +12,7 @@ agents-cli-eval-example/
 │   ├── agent.py                   # 對聯創作機器人主程式與創作提示詞設定
 │   ├── app_utils/                 # 應用程式輔助工具與遙測 (Telemetry) 模組
 │   └── fast_api_app.py            # FastAPI 本機開發服務介面
-├── benchmark_examples/              # 💡 官方標準基準與對比實驗成果檔 (含 JSON 與 HTML Report, 受 Git 版控)
+├── benchmark_examples/            # 💡 測試報告範例檔 (含 JSON 數據與 HTML 視覺化報告)
 ├── tests/                         # 單元測試、整合測試與代理評估測試案例
 │   ├── eval/                      # 💡 [重點目錄] 測試案例與評分標準核心設定
 │   │   ├── datasets/              # 評估測試資料集目錄
@@ -131,7 +131,7 @@ agents-cli eval dataset synthesize --count 10
 | **`COUPLET_THINKING_LEVEL`**| 推理思考深度等級 | `"medium"` | `"minimal"`, `"medium"`, `"high"` |
 | **`COUPLET_PROMPT_MODE`** | 創作提示詞版本 | `"detailed"` (完整格律版) | `"simple"` (簡易常規版) |
 
-*(官方標準基準實驗報告皆收錄於根目錄 `benchmark_examples/` 下，內含 JSON 數據與 HTML 視覺化報告，受 Git 正常追蹤)*
+*(測試報告範例皆收錄於根目錄 `benchmark_examples/` 下，內含 JSON 數據與 HTML 視覺化報告)*
 
 ##### 💻 A/B 對比實驗執行指令
 
@@ -166,14 +166,14 @@ agents-cli eval compare benchmark_examples/results_gemini35_flash_medium.json be
 agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json
 ```
 
-##### 📊 官方基準評估 HTML Report 預覽連結
-我們在專案根目錄的 `benchmark_examples/` 下預先跑出了完整的視覺化評估報告（內含完整的模型思考過程 Thoughts、生成作品與 LLM-as-a-Judge 評分依據說明）。您可隨時自行執行上方指令跑分，也可點擊以下連結直接查看官方跑出的結果：
+##### 📊 HTML 測試報告範例預覽連結
+根目錄的 `benchmark_examples/` 下備有預先跑出的測試報告範例（包含完整的模型思考過程 Thoughts、創作結果與 LLM-as-a-Judge 評分說明）。您可以自行執行上方指令重新測試，也可點擊下方連結直接檢視範例：
 
-- **[檢視 HTML 報告：Gemini 2.5 Flash (Baseline)](./benchmark_examples/results_gemini25_flash_medium.html)**
-- **[檢視 HTML 報告：Gemini 3.5 Flash (Candidate A - 跨世代主力進階)](./benchmark_examples/results_gemini35_flash_medium.html)**
-- **[檢視 HTML 報告：Gemini 2.5 Pro (Candidate B - 跨架構古風進階)](./benchmark_examples/results_gemini25_pro_medium.html)**
-- **[檢視 HTML 報告：Gemini 3.1 Pro Preview (Candidate C - 嚴格格律與文學美學雙冠大師)](./benchmark_examples/results_gemini31_pro_medium.html)**
-- **[檢視 HTML 報告：Gemini 3.5 Flash 簡易提示詞對照版 (提示詞工程實驗 A)](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
+- **[檢視 HTML 報告範例：Gemini 2.5 Flash (Baseline)](./benchmark_examples/results_gemini25_flash_medium.html)**
+- **[檢視 HTML 報告範例：Gemini 3.5 Flash (Candidate A - 跨世代對比)](./benchmark_examples/results_gemini35_flash_medium.html)**
+- **[檢視 HTML 報告範例：Gemini 2.5 Pro (Candidate B - 跨架構對比)](./benchmark_examples/results_gemini25_pro_medium.html)**
+- **[檢視 HTML 報告範例：Gemini 3.1 Pro Preview (Candidate C - 旗艦格律對比)](./benchmark_examples/results_gemini31_pro_medium.html)**
+- **[檢視 HTML 報告範例：Gemini 3.5 Flash 簡易提示詞對照版 (提示詞工程對比)](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
 
 ---
 
