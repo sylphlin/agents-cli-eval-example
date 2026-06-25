@@ -182,7 +182,6 @@ agents-cli eval submit \
 # Check status and download remote evaluation results (add --region if submitted with a specific region)
 agents-cli eval results --run-id <EVAL_RUN_RESOURCE_NAME> --region <REGION>
 ```
-```
 
 ---
 

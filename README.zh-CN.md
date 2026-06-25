@@ -180,7 +180,6 @@ agents-cli eval submit \
 # 异步轮询与下载云端产出的评估报告 (若 submit 时有带 --region，此处也必须加上对应 region)
 agents-cli eval results --run-id <EVAL_RUN_RESOURCE_NAME> --region <REGION>
 ```
-```
 
 ---
 
