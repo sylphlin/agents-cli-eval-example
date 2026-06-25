@@ -166,14 +166,14 @@ agents-cli eval compare benchmark_examples/results_gemini35_flash_medium.json be
 agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json
 ```
 
-##### 📊 HTML 測試報告範例預覽連結
-根目錄的 `benchmark_examples/` 下備有預先跑出的測試報告範例（包含完整的模型思考過程 Thoughts、創作結果與 LLM-as-a-Judge 評分說明）。您可以自行執行上方指令重新測試，也可點擊下方連結直接檢視範例：
+##### 📊 各模型單點評估 HTML Report 範例連結
+根目錄的 `benchmark_examples/` 下備有各組模型獨立測試的 HTML 評估報告範例（包含完整的模型思考過程 Thoughts、對聯創作結果與 LLM-as-a-Judge 逐題評分說明）。您可以點擊下方連結直接檢視各模型的單點測試結果，再搭配上方的 `eval compare` 指令進行兩兩比對：
 
-- **[檢視 HTML 報告範例：Gemini 2.5 Flash (Baseline)](./benchmark_examples/results_gemini25_flash_medium.html)**
-- **[檢視 HTML 報告範例：Gemini 3.5 Flash (Candidate A - 跨世代對比)](./benchmark_examples/results_gemini35_flash_medium.html)**
-- **[檢視 HTML 報告範例：Gemini 2.5 Pro (Candidate B - 跨架構對比)](./benchmark_examples/results_gemini25_pro_medium.html)**
-- **[檢視 HTML 報告範例：Gemini 3.1 Pro Preview (Candidate C - 旗艦格律對比)](./benchmark_examples/results_gemini31_pro_medium.html)**
-- **[檢視 HTML 報告範例：Gemini 3.5 Flash 簡易提示詞對照版 (提示詞工程對比)](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
+- **[檢視報告：Gemini 2.5 Flash 評估結果](./benchmark_examples/results_gemini25_flash_medium.html)**
+- **[檢視報告：Gemini 3.5 Flash 評估結果](./benchmark_examples/results_gemini35_flash_medium.html)**
+- **[檢視報告：Gemini 2.5 Pro 評估結果](./benchmark_examples/results_gemini25_pro_medium.html)**
+- **[檢視報告：Gemini 3.1 Pro Preview 評估結果](./benchmark_examples/results_gemini31_pro_medium.html)**
+- **[檢視報告：Gemini 3.5 Flash (簡易提示詞版) 評估結果](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
 
 ---
 
