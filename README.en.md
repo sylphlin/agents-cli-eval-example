@@ -152,7 +152,7 @@ uv run pytest tests/integration/
 
 ---
 
-### 3. Cloud-side Deploy & Remote Eval
+## ☁️ Cloud-side Deploy & Remote Evaluation Service (Cloud-side Deploy & Remote Eval)
 
 Once local tests and evaluations are satisfied, developers can deploy the agent to Google Cloud (such as Vertex AI Agent Runtime or Cloud Run) and launch high-concurrency evaluation tasks using **Agent Platform Eval Service** on the cloud:
 
