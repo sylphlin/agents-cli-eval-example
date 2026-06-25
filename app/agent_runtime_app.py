@@ -13,7 +13,7 @@
 # limitations under the License.
 import logging
 import os
-from typing import Any
+from typing import Any, Union
 
 import vertexai
 from dotenv import load_dotenv
@@ -41,6 +41,49 @@ class AgentEngineApp(AdkApp):
         if gemini_location:
             os.environ["GOOGLE_CLOUD_LOCATION"] = gemini_location
 
+    def query(
+        self,
+        *,
+        message: Union[str, dict[str, Any]],
+        user_id: str = "default_user",
+        session_id: str | None = None,
+        run_config: dict[str, Any] | None = None,
+        **kwargs,
+    ) -> dict[str, Any]:
+        """Synchronously queries the agent and returns the final response in ADK format."""
+        import json
+        text_parts = []
+        for event_raw in self.stream_query(
+            message=message,
+            user_id=user_id,
+            session_id=session_id,
+            run_config=run_config,
+            **kwargs,
+        ):
+            if not event_raw:
+                continue
+            event = event_raw
+            if isinstance(event, str):
+                try:
+                    event = json.loads(event)
+                except Exception:
+                    continue
+            if isinstance(event, dict):
+                content = event.get("content")
+                if content and isinstance(content, dict):
+                    parts = content.get("parts", [])
+                    for part in parts:
+                        if isinstance(part, dict) and part.get("text"):
+                            text_parts.append(part["text"])
+
+        final_text = "".join(text_parts)
+        return {
+            "response": {
+                "parts": [{"text": final_text}],
+                "role": "model",
+            }
+        }
+
     def register_feedback(self, feedback: dict[str, Any]) -> None:
         """Collect and log feedback."""
         feedback_obj = Feedback.model_validate(feedback)
@@ -49,7 +92,7 @@ class AgentEngineApp(AdkApp):
     def register_operations(self) -> dict[str, list[str]]:
         """Registers the operations of the Agent."""
         operations = super().register_operations()
-        operations[""] = [*operations.get("", []), "register_feedback"]
+        operations[""] = [*operations.get("", []), "register_feedback", "query"]
         return operations
 
     def clone(self) -> "AgentEngineApp":
