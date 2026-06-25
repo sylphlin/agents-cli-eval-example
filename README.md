@@ -213,11 +213,33 @@ uv run pytest tests/integration
 
 ---
 
-## 🚀 快速上手與常規開發指令
+### 3. 雲端部署與線上遠端評估服務 (`Cloud-side Deploy & Remote Eval`)
 
-| 指令 | 說明 |
-| --- | --- |
-| `agents-cli install` | 使用 uv 安裝與同步專案相依套件 |
-| `agents-cli playground` | 啟動本機網頁互動開發游樂場（儲存 `app/agent.py` 時自動熱重載） |
-| `agents-cli lint` | 執行程式碼格式與靜態型別檢查 (`ruff` / `ty`) |
-| `agents-cli eval --help` | 查看完整的代理評估 CLI 參數與使用說明 |
+當本地測試與合規評估滿分後，開發者可一鍵將機器人部署至 Google Cloud 生產環境（如 Vertex AI Agent Runtime 全託管引擎或 Cloud Run），並啟動雲端非同步的 **Agent Platform Eval Service** 對線上已部署的實例進行高併發推論對話測試與 LLM-as-a-Judge 評分：
+
+```bash
+# ---------------------------------------------------------------------
+# ① 初始化雲端託管基礎建設架構 (生成 Dockerfile / Terraform 腳本)
+# ---------------------------------------------------------------------
+agents-cli scaffold enhance . --deployment-target agent_runtime -y
+
+# ---------------------------------------------------------------------
+# ② 正式建置並部署上雲 (支援非同步啟動 --no-wait)
+# ---------------------------------------------------------------------
+agents-cli deploy --project <YOUR_PROJECT_ID> --no-confirm-project --no-wait
+
+# 隨時查詢後端推論引擎部署進度狀態
+agents-cli deploy --status
+
+# ---------------------------------------------------------------------
+# ③ 執行雲端線上推論與自動裁判評估 (由雲端平行併發處理，零本機運算壓力)
+# ---------------------------------------------------------------------
+# 將題庫提交至雲端，對線上 Reasoning Engine 跑推論對話 + LLM 裁判自動打分
+agents-cli eval submit \
+  --dataset tests/eval/datasets/basic-dataset.json \
+  --dest gs://<YOUR_GCS_BUCKET_NAME> \
+  --resource-name "projects/<PROJECT_ID>/locations/<LOCATION>/reasoningEngines/<REASONING_ENGINE_ID>"
+
+# 非同步輪詢與下載雲端產出的評估報告
+agents-cli eval results --run-id <EVAL_RUN_RESOURCE_NAME>
+```
