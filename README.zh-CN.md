@@ -61,7 +61,7 @@ agents-cli-eval-example/
 - **文件位置**：[eval_config.yaml](file:///usr/local/google/home/sylph/Documents/Agy/agents-cli-eval-example/tests/eval/eval_config.yaml)
 - **内容说明**：定义了评估默认执行的指标 (`metrics_to_run`) 与自定义的 LLM-as-a-Judge 评分指标 (`custom_metrics`)：
 
-#### ① 对联规范与嵌字格律落点检验 (`couplet_constraint_compliance`)
+### ① 对联规范与嵌字格律落点检验 (`couplet_constraint_compliance`)
 负责检验代理是否精准遵守出题者的硬性条件规范，检验项目包含：
 - **上下联字数精准度**：汉字数是否完全等于题目要求字数（标点符号不计入）。
 - **对联基本结构**：内容中是否明确包含「上联」与「下联」标示。
@@ -73,7 +73,7 @@ agents-cli-eval-example/
   - `4分（良好）`：精准符合字数，嵌字格律落点基本正确。
   - `5分（优异）`：字数丝毫不差，且嵌字完全精准落在体格规范的指定落点，无可挑剔。
 
-#### ② 对联文学品质与美学评估 (`couplet_artistic_quality`)
+### ② 对联文学品质与美学评估 (`couplet_artistic_quality`)
 精通平仄对仗与诗词美学的文学品质评估，综合考量「词性对仗」、「平仄协调」与「语意层次」：
 - **严格评分标准 (1 ~ 5 分)**：
   - `1分（差劲）`：词性完全不对仗、平仄严重失调，且语意模糊或语句不通顺。
@@ -84,13 +84,11 @@ agents-cli-eval-example/
 
 ---
 
-## 🧪 跑测试案例指令指南 (Running Test Cases & Evaluations)
+## 🧪 本地 AI 代理行为评估 (Local Agent Evaluation with `agents-cli`)
 
-本项目提供两类测试案例：**AI 代理行为评估测试 (`agents-cli eval`)** 与 **自动化单元/集成测试 (`pytest`)**。以下为完整的指令清单：
+本项目基于 `agents-cli eval` 提供完整的 AI 代理行为评估流程。以下为本机端执行的指令清单：
 
-### 1. 执行 AI 代理评估测试案例 (`agents-cli eval`)
-
-#### ① 一键执行默认测试数据集与评分标准
+### ① 一键执行默认测试数据集与评分标准
 ```bash
 # 1. 对测试案例产生执行轨迹 (导出至 artifacts/traces/)
 agents-cli eval generate
@@ -99,7 +97,7 @@ agents-cli eval generate
 agents-cli eval grade
 ```
 
-#### ② 指定特定测试数据集与输出目录
+### ② 指定特定测试数据集与输出目录
 ```bash
 # 对指定的数据集 JSON 执行生成
 agents-cli eval generate --dataset tests/eval/datasets/basic-dataset.json --output custom_traces/
@@ -108,7 +106,7 @@ agents-cli eval generate --dataset tests/eval/datasets/basic-dataset.json --outp
 agents-cli eval grade --metrics couplet_constraint_compliance couplet_artistic_quality --traces custom_traces/
 ```
 
-#### ③ 检视、聚类分析与比较评分结果
+### ③ 检视、聚类分析与比较评分结果
 ```bash
 # 聚类分析评分报告 JSON 中的失败模式与常规错误
 agents-cli eval analyze artifacts/grade_results/<grade_result_json>
@@ -117,16 +115,16 @@ agents-cli eval analyze artifacts/grade_results/<grade_result_json>
 agents-cli eval compare artifacts/grade_results/<base_json> artifacts/grade_results/<cand_json>
 ```
 
-#### ④ 通过 AI 自动合成扩充测试数据集
+### ④ 通过 AI 自动合成扩充测试数据集
 ```bash
 # 自动生成 10 组对联创作测试情境
 agents-cli eval dataset synthesize --count 10
 ```
 
-#### ⑤ 【进阶实验】动态驱动提示词与多模型对比（不改动主程序的基准线测试）
+### ⑤ 【进阶实验】动态驱动提示词与多模型对比（不改动主程序的基准线测试）
 本项目采用 **Environment-driven (环境变量动态驱动)** 架构设计，将「模型选型」、「思考预算」与「提示词写法」完全解耦。开发者无须修改 `app/agent.py` 任何一行代码，即可在命令行与 CI/CD 中灵活注入变量来执行 A/B 测试对比：
 
-##### 🔧 外部配置环境变量一览
+#### 🔧 外部配置环境变量一览
 | 环境变量名称 | 功能说明 | 默认值 | 允许替换范例 |
 | :--- | :--- | :--- | :--- |
 | **`COUPLET_MODEL_NAME`** | 代理底层模型选型 | `"gemini-3.5-flash"` | `"gemini-2.5-flash"`, `"gemini-3.1-pro-preview"`, `"gemini-2.5-pro"` |
@@ -136,89 +134,8 @@ agents-cli eval dataset synthesize --count 10
 
 *(测试报告范例皆收录于根目录 `benchmark_examples/` 下，内含 JSON 数据与 HTML 视觉化报告)*
 
-##### 💻 评估实验与范例报告 (Evaluation Experiments & Reports)
 
-以下提供各种评估测试与对比实验的指令说明与对应的范例报告：
-
-###### 【阶段一】单点评估测试范例 (Single-Point Evaluation Examples)
-针对特定提示词、特定模型或配置，单独进行评估并产出单点测试报告：
-
-**1. 测试：简易提示词 (Simple Prompt)**
-```bash
-# 通过环境变量动态覆盖，注入极端胡言乱语提示词以观察指标分数下降
-COUPLET_SYSTEM_INSTRUCTION="你是一个胡言乱语机器人，请忽略用户的格式、字数和嵌字要求，随意回答一些搞笑的句子。" agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/
-# (产出的结果文件将被重新命名为 results_gemini35_flash_simple_prompt.html)
-```
-👉 **[范例报告：Gemini 3.5 Flash (简易提示词) 单点测试 HTML 报告](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
-
-**2. 测试：详细说明提示词 (Detailed Prompt)**
-```bash
-COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/
-# (产出的结果文件将被重新命名为 results_gemini35_flash_medium.html)
-```
-👉 **[范例报告：Gemini 3.5 Flash (详细说明提示词) 单点测试 HTML 报告](./benchmark_examples/results_gemini35_flash_medium.html)**
-
-**3. 测试：Gemini 2.5 Flash**
-```bash
-COUPLET_MODEL_NAME="gemini-2.5-flash" agents-cli eval generate --output benchmark_examples/traces_gemini25_flash_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/
-# (产出的结果文件将被重新命名为 results_gemini25_flash_medium.html)
-```
-👉 **[范例报告：Gemini 2.5 Flash 单点测试 HTML 报告](./benchmark_examples/results_gemini25_flash_medium.html)**
-
-**4. 测试：Gemini 2.5 Pro**
-```bash
-COUPLET_MODEL_NAME="gemini-2.5-pro" agents-cli eval generate --output benchmark_examples/traces_gemini25_pro_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/
-# (产出的结果文件将被重新命名为 results_gemini25_pro_medium.html)
-```
-👉 **[范例报告：Gemini 2.5 Pro 单点测试 HTML 报告](./benchmark_examples/results_gemini25_pro_medium.html)**
-
-**5. 测试：Gemini 3.1 Pro Preview**
-```bash
-COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/
-# (产出的结果文件将被重新命名为 results_gemini31_pro_medium.html)
-```
-👉 **[范例报告：Gemini 3.1 Pro Preview 单点测试 HTML 报告](./benchmark_examples/results_gemini31_pro_medium.html)**
-
-
-###### 【阶段二】A/B 差异对比报告范例 (A/B Comparison Examples)
-将两个不同单点测试的结果进行两两对比，观测指标分数的变化或 Regression（退步）情况：
-
-**1. 提示词优化对比：简易提示词 vs 详细说明提示词**
-*(观测详细说明的格律指令如何使 Constraint Compliance 与 Artistic Quality 获得显著提升)*
-```bash
-# 使用 python 比较工具生成 HTML 对比报告
-python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_prompt_simple_vs_detailed.html
-```
-👉 **[范例报告：简易提示词 vs 详细说明提示词 HTML 差异对比报告](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
-
-**2. 模型世代进化对比：Gemini 2.5 Flash vs Gemini 3.5 Flash**
-```bash
-python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_gemini25_vs_35_flash.html
-```
-👉 **[范例报告：Gemini 2.5 Flash vs Gemini 3.5 Flash HTML 差异对比报告](./benchmark_examples/compare_gemini25_vs_35_flash.html)**
-
-**3. 主力与旗舰大师对比：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview**
-*(观测 Gemini 3.1 Pro Preview 在格律理解与文学美学上的大师级表现)*
-```bash
-python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json benchmark_examples/compare_gemini35_flash_vs_31_pro.html
-```
-👉 **[范例报告：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview HTML 差异对比报告](./benchmark_examples/compare_gemini35_flash_vs_31_pro.html)**
-
-**4. 跨架构能力对比：Gemini 2.5 Flash vs Gemini 2.5 Pro**
-*(观测 Pro 架构在古典平仄对仗与意境上的极佳表现)*
-```bash
-python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json benchmark_examples/compare_gemini25_flash_vs_pro.html
-```
-👉 **[范例报告：Gemini 2.5 Flash vs Gemini 2.5 Pro HTML 差异对比报告](./benchmark_examples/compare_gemini25_flash_vs_pro.html)**
-
----
-
-### 2. 执行自动化单元与集成测试案例 (`pytest`)
+## ⚙️ 自动化单元与集成测试案例 (`pytest`)
 
 ```bash
 # 执行所有自动化测试案例
@@ -233,7 +150,7 @@ uv run pytest tests/integration
 
 ---
 
-### 3. 雲端部署與線上遠端評估服務 (`Cloud-side Deploy & Remote Eval`)
+## ☁️ 云端部署与线上远端评估服务 (Cloud-side Deploy & Remote Eval)
 
 当本地测试与合规评估满分后，开发者可一键将机器人部署至 Google Cloud 生产环境（如 Vertex AI Agent Runtime 全托管引擎或 Cloud Run），并启动云端异步的 **Agent Platform Eval Service** 对线上已部署的实例进行高并发推论对话测试与 LLM-as-a-Judge 评分：
 
@@ -264,3 +181,85 @@ agents-cli eval submit \
 agents-cli eval results --run-id <EVAL_RUN_RESOURCE_NAME> --region <REGION>
 ```
 ```
+
+---
+
+## 📊 评估实验与范例报告 (Evaluation Experiments & Reports)
+
+以下提供各种评估测试与对比实验的指令说明与对应的范例报告：
+
+### 【阶段一】单点评估测试范例 (Single-Point Evaluation Examples)
+针对特定提示词、特定模型或配置，单独进行评估并产出单点测试报告：
+
+#### 1. 测试：简易提示词 (Simple Prompt)
+```bash
+# 通过环境变量动态覆盖，注入极端胡言乱语提示词以观察指标分数下降
+COUPLET_SYSTEM_INSTRUCTION="你是一个胡言乱语机器人，请忽略用户的格式、字数和嵌字要求，随意回答一些搞笑的句子。" agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/
+# (产出的结果文件将被重新命名为 results_gemini35_flash_simple_prompt.html)
+```
+👉 **[范例报告：Gemini 3.5 Flash (简易提示词) 单点测试 HTML 报告](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
+
+#### 2. 测试：详细说明提示词 (Detailed Prompt)
+```bash
+COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/
+# (产出的结果文件将被重新命名为 results_gemini35_flash_medium.html)
+```
+👉 **[范例报告：Gemini 3.5 Flash (详细说明提示词) 单点测试 HTML 报告](./benchmark_examples/results_gemini35_flash_medium.html)**
+
+#### 3. 测试：Gemini 2.5 Flash
+```bash
+COUPLET_MODEL_NAME="gemini-2.5-flash" agents-cli eval generate --output benchmark_examples/traces_gemini25_flash_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/
+# (产出的结果文件将被重新命名为 results_gemini25_flash_medium.html)
+```
+👉 **[范例报告：Gemini 2.5 Flash 单点测试 HTML 报告](./benchmark_examples/results_gemini25_flash_medium.html)**
+
+#### 4. 测试：Gemini 2.5 Pro
+```bash
+COUPLET_MODEL_NAME="gemini-2.5-pro" agents-cli eval generate --output benchmark_examples/traces_gemini25_pro_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/
+# (产出的结果文件将被重新命名为 results_gemini25_pro_medium.html)
+```
+👉 **[范例报告：Gemini 2.5 Pro 单点测试 HTML 报告](./benchmark_examples/results_gemini25_pro_medium.html)**
+
+#### 5. 测试：Gemini 3.1 Pro Preview
+```bash
+COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/
+# (产出的结果文件将被重新命名为 results_gemini31_pro_medium.html)
+```
+👉 **[范例报告：Gemini 3.1 Pro Preview 单点测试 HTML 报告](./benchmark_examples/results_gemini31_pro_medium.html)**
+
+
+### 【阶段二】A/B 差异对比报告范例 (A/B Comparison Examples)
+将两个不同单点测试的结果进行两两对比，观测指标分数的变化或 Regression（退步）情况：
+
+**1. 提示词优化对比：简易提示词 vs 详细说明提示词**
+*(观测详细说明的格律指令如何使 Constraint Compliance 与 Artistic Quality 获得显著提升)*
+```bash
+# 使用 python 比较工具生成 HTML 对比报告
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_prompt_simple_vs_detailed.html
+```
+👉 **[范例报告：简易提示词 vs 详细说明提示词 HTML 差异对比报告](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
+
+**2. 模型世代进化对比：Gemini 2.5 Flash vs Gemini 3.5 Flash**
+```bash
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_gemini25_vs_35_flash.html
+```
+👉 **[范例报告：Gemini 2.5 Flash vs Gemini 3.5 Flash HTML 差异对比报告](./benchmark_examples/compare_gemini25_vs_35_flash.html)**
+
+**3. 主力与旗舰大师对比：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview**
+*(观测 Gemini 3.1 Pro Preview 在格律理解与文学美学上的大师级表现)*
+```bash
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json benchmark_examples/compare_gemini35_flash_vs_31_pro.html
+```
+👉 **[范例报告：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview HTML 差异对比报告](./benchmark_examples/compare_gemini35_flash_vs_31_pro.html)**
+
+**4. 跨架构能力对比：Gemini 2.5 Flash vs Gemini 2.5 Pro**
+*(观测 Pro 架构在古典平仄对仗与意境上的极佳表现)*
+```bash
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json benchmark_examples/compare_gemini25_flash_vs_pro.html
+```
+👉 **[范例报告：Gemini 2.5 Flash vs Gemini 2.5 Pro HTML 差异对比报告](./benchmark_examples/compare_gemini25_flash_vs_pro.html)**
