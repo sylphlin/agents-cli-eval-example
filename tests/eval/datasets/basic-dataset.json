@@ -1,0 +1,92 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "spring_festival_7_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "請幫我寫一副春節賀歲對聯，要求上下聯各7個字，且上聯需嵌入『春』字，下聯需嵌入『福』字。"
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "company_opening_5_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "寫一副慶祝科技公司開工的5字對聯。"
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "he_ding_ge_7_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "請創作一副春節7字對聯，採用『鶴頂格』（冠頭格）嵌入『龍年』二字，即上聯首字必須為『龍』，下聯首字必須為『年』。"
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "yan_zu_ge_5_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "請創作一副祝壽5字對聯，採用『雁足格』（藏尾格）嵌入『長壽』二字，即上聯末字必須為『長』，下聯末字必須為『壽』。"
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "fu_qian_ge_7_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "請創作一副開業7字對聯，採用『腹嵌格』嵌入『鴻圖』二字，即上聯正中央（第4字）必須為『鴻』，下聯正中央（第4字）必須為『圖』。"
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "kui_dou_ge_7_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "請創作一副慶賀7字對聯，採用『魁鬥格』嵌入『福滿』二字，即上聯首字（第1字）必須為『福』，下聯末字（第7字）必須為『滿』。"
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "lian_li_ge_7_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "請創作一副新婚賀喜7字對聯，採用『連理格』嵌入『同心』二字，要求『同心』兩字必須連續相鄰出現在上聯或下聯的語句中。"
+          }
+        ]
+      }
+    },
+    {
+      "eval_case_id": "sui_jin_ge_7_char",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "請創作一副山水風景7字對聯，採用『碎錦格』（散嵌）嵌入『風調雨順』四個字，要求這四個字分散出現在上下聯的語句當中。"
+          }
+        ]
+      }
+    }
+  ]
+}

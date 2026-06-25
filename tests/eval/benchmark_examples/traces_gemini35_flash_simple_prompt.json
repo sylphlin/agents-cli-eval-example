@@ -1,0 +1,436 @@
+{
+  "eval_cases": [
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "請幫我寫一副春節賀歲對聯，要求上下聯各7個字，且上聯需嵌入『春』字，下聯需嵌入『福』字。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：春風拂面千家暖\n    下聯：福氣臨門萬事興"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "spring_festival_7_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：春風拂面千家暖\n    下聯：福氣臨門萬事興"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "寫一副慶祝科技公司開工的5字對聯。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：智造啟新程\n    下聯：科創展宏圖"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "company_opening_5_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：智造啟新程\n    下聯：科創展宏圖"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "請創作一副春節7字對聯，採用『鶴頂格』（冠頭格）嵌入『龍年』二字，即上聯首字必須為『龍』，下聯首字必須為『年』。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：龍騰瑞氣千家喜\n    下聯：年兆豐收萬戶歡"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "he_ding_ge_7_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：龍騰瑞氣千家喜\n    下聯：年兆豐收萬戶歡"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "請創作一副祝壽5字對聯，採用『雁足格』（藏尾格）嵌入『長壽』二字，即上聯末字必須為『長』，下聯末字必須為『壽』。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：松齡日月長\n    下聯：鶴算乾坤壽"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "yan_zu_ge_5_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：松齡日月長\n    下聯：鶴算乾坤壽"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "請創作一副開業7字對聯，採用『腹嵌格』嵌入『鴻圖』二字，即上聯正中央（第4字）必須為『鴻』，下聯正中央（第4字）必須為『圖』。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：啟駿業鴻基永固\n下聯：開新宇圖謀大猷"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "fu_qian_ge_7_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：啟駿業鴻基永固\n下聯：開新宇圖謀大猷"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "請創作一副慶賀7字對聯，採用『魁鬥格』嵌入『福滿』二字，即上聯首字（第1字）必須為『福』，下聯末字（第7字）必須為『滿』。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：福降人間春意濃\n下聯：瑞呈大地惠風滿"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "kui_dou_ge_7_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：福降人間春意濃\n下聯：瑞呈大地惠風滿"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "請創作一副新婚賀喜7字對聯，採用『連理格』嵌入『同心』二字，要求『同心』兩字必須連續相鄰出現在上聯或下聯的語句中。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：比翼雙飛連理樹\n    下聯：同心共結百年歡"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "lian_li_ge_7_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：比翼雙飛連理樹\n    下聯：同心共結百年歡"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "請創作一副山水風景7字對聯，採用『碎錦格』（散嵌）嵌入『風調雨順』四個字，要求這四個字分散出現在上下聯的語句當中。"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "上聯：山**調**綠琴**風**送雅\n下聯：水**順**晴瀾**雨**生花"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "sui_jin_ge_7_char",
+      "agent_data": {
+        "agents": {
+          "couplet_generator": {
+            "agent_id": "couplet_generator",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "你是一個對聯創作機器人。請根據用戶的要求創作對聯，並嚴格遵守字數限制與嵌字條件。\n請以格式「上聯：[內容]\n下聯：[內容]」輸出。",
+            "tools": [],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "couplet_generator",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "上聯：山**調**綠琴**風**送雅\n下聯：水**順**晴瀾**雨**生花"
+                    }
+                  ],
+                  "role": "model"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
