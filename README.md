@@ -1,248 +1,248 @@
-[English (en)](README.md) | [繁體中文 (zh-TW)](README.zh-TW.md) | [简体中文 (zh-CN)](README.zh-CN.md)
+[English (en)](README.en.md) | [繁體中文 (zh-TW)](README.md) | [简体中文 (zh-CN)](README.zh-CN.md)
 
-# Couplet Creator Robot & agents-cli eval Example (agents-cli-eval-example)
+# 對聯創作機器人與 agents-cli eval 評估範例 (agents-cli-eval-example)
 
-This project is a "Couplet Creator Robot (`couplet_generator`)" built on Google ADK (Agent Development Kit) and `agents-cli`. It is designed to demonstrate how to perform **hard logical constraint verification** and **soft literary aesthetic evaluation** on AI agents. It serves as the standard demonstration project for the `agents-cli eval` framework.
+本專案是一個基於 Google ADK（Agent Development Kit）與 `agents-cli` 建構的「對聯創作機器人 (`couplet_generator`)」，專門用來展示如何對 AI 代理執行**硬性邏輯條件驗證**與**軟性文學意境美學評估**，是 `agents-cli eval` 系統的標準示範專案。
 
 ---
 
-## 📂 Project Structure
+## 📂 專案結構說明
 
 ```text
 agents-cli-eval-example/
-├── app/                           # Core agent logic and application container
-│   ├── agent.py                   # Couplet Creator Robot main program and prompts configuration
-│   ├── app_utils/                 # Helper utilities and Telemetry module
-│   └── fast_api_app.py            # FastAPI local development server interface
-├── benchmark_examples/            # 💡 Benchmark examples (includes JSON logs and HTML visual reports)
-├── tests/                         # Unit tests, integration tests, and agent evaluation cases
-│   ├── eval/                      # 💡 [Key Folder] Evaluation configuration and datasets
-│   │   ├── datasets/              # Dataset directory
-│   │   │   ├── basic-dataset.json # Standard couplet evaluation dataset (8 typical scenarios)
-│   │   │   └── README.md          # Dataset schema and custom dataset guide
-│   │   └── eval_config.yaml       # Custom evaluation metrics configuration (LLM-as-a-Judge)
-│   ├── integration/               # Integration tests
-│   └── unit/                      # Unit tests
-├── artifacts/                     # Generated execution traces and evaluation reports (Git ignored)
-├── .gitignore                     # Git ignore rules
-├── .agents-cli-spec.md            # Agent specification and design details
-├── AGENTS.md                      # AI-assisted development guidelines
-└── pyproject.toml                 # Dependencies and configuration
+├── app/                           # 核心代理邏輯與應用程式容器
+│   ├── agent.py                   # 對聯創作機器人主程式與創作提示詞設定
+│   ├── app_utils/                 # 應用程式輔助工具與遙測 (Telemetry) 模組
+│   └── fast_api_app.py            # FastAPI 本機開發服務介面
+├── benchmark_examples/            # 💡 測試報告範例檔 (含 JSON 數據與 HTML 視覺化報告)
+├── tests/                         # 單元測試、整合測試與代理評估測試案例
+│   ├── eval/                      # 💡 [重點目錄] 測試案例與評分標準核心設定
+│   │   ├── datasets/              # 評估測試資料集目錄
+│   │   │   ├── basic-dataset.json # 標準對聯創作評估測試題庫 (8大典型場景)
+│   │   │   └── README.md          # 資料集結構與自訂資料集說明指南
+│   │   └── eval_config.yaml       # 評分標準與自訂評量指標設定檔 (LLM-as-a-Judge)
+│   ├── integration/               # 整合測試案例
+│   └── unit/                      # 單元測試案例
+├── artifacts/                     # 執行 eval 產生的軌跡檔 (traces) 與評分報告 (grade_results)
+├── .gitignore                     # Git 忽略檔案設定
+├── .agents-cli-spec.md            # 代理規格與核心設計說明文件
+├── AGENTS.md                      # AI 輔助開發準則指南
+└── pyproject.toml                 # 專案相依套件與設定
 ```
 
 ---
 
-## 🎯 Dataset and Evaluation Config Locations
+## 🎯 測試案例與評分標準位置說明
 
-When conducting agent evaluation (`agents-cli eval`), the most critical configuration files are located under the `tests/eval/` directory:
+進行 AI 代理評估 (`agents-cli eval`) 時，最核心的兩大設定對應於本專案的 `tests/eval/` 目錄：
 
-### 1. Evaluation Dataset (Test Cases)
+### 1. 測試案例 (Evaluation Datasets / Test Cases)
 
-- **File Path**: [basic-dataset.json](file:///usr/local/google/home/sylph/Documents/Agy/agents-cli-eval-example/tests/eval/datasets/basic-dataset.json) (under the [tests/eval/datasets/](file:///usr/local/google/home/sylph/Documents/Agy/agents-cli-eval-example/tests/eval/datasets) directory)
-- **Description**: Provides user prompts for couplet generation covering **8 typical couplet formats and embedding constraint scenarios**:
-  1. `spring_festival_7_char`: A 7-character Chinese New Year couplet embedding "Spring" (春) in the first line and "Fortune" (福) in the second.
-  2. `company_opening_5_char`: A 5-character couplet celebrating the opening of a tech company.
-  3. `he_ding_ge_7_char`: A 7-character "He-Ding" couplet where the first characters must be "Dragon" (龍) and "Year" (年).
-  4. `yan_zu_ge_5_char`: A 5-character "Yan-Zu" couplet where the last characters must be "Longevity" (長) and "Age" (壽).
-  5. `fu_qian_ge_7_char`: A 7-character "Fu-Qian" couplet where the middle (4th) characters must be "Grandeur" (鴻) and "Map" (圖).
-  6. `kui_dou_ge_7_char`: A 7-character "Kui-Dou" couplet where the first line starts with "Fortune" (福) and the second line ends with "Abundance" (滿).
-  7. `lian_li_ge_7_char`: A 7-character "Lian-Li" couplet where "Same Heart" (同心) must appear side-by-side continuously.
-  8. `sui_jin_ge_7_char`: A 7-character "Sui-Jin" couplet embedding the idiom "Favorable Weather" (風調雨順) scattered across both lines.
+- **檔案位置**：[basic-dataset.json](file:///usr/local/google/home/sylph/Documents/Agy/agents-cli-eval-example/tests/eval/datasets/basic-dataset.json)（以及 [tests/eval/datasets/](file:///usr/local/google/home/sylph/Documents/Agy/agents-cli-eval-example/tests/eval/datasets) 目錄）
+- **內容說明**：提供多組對聯創作的用戶提示詞（單一提示詞 Shape A 結構），涵蓋 **8 種典型對聯創作與嵌字格律驗證場景**：
+  1. `spring_festival_7_char`：7字春節賀歲對聯，要求上聯嵌『春』、下聯嵌『福』。
+  2. `company_opening_5_char`：5字慶祝科技公司開工對聯。
+  3. `he_ding_ge_7_char`：7字鶴頂格（冠頭格），首字必須為『龍』與『年』。
+  4. `yan_zu_ge_5_char`：5字雁足格（藏尾格），末字必須為『長』與『壽』。
+  5. `fu_qian_ge_7_char`：7字腹嵌格，正中央第4字必須為『鴻』與『圖』。
+  6. `kui_dou_ge_7_char`：7字魁鬥格，上聯首字嵌『福』、下聯末字嵌『滿』。
+  7. `lian_li_ge_7_char`：7字連理格，要求『同心』二字相鄰連續出現。
+  8. `sui_jin_ge_7_char`：7字碎錦格（散嵌），要求『風調雨順』分散出現在上下聯中。
 
-> 💡 **Adding Test Cases**: You can manually copy and expand `basic-dataset.json`, or generate synthetic test cases automatically using:
+> 💡 **擴充測試案例**：您可以直接複製 `basic-dataset.json` 進行手動擴充，或執行指令自動生成測試情境：
 > ```bash
 > agents-cli eval dataset synthesize --count 10
 > ```
 
 ---
 
-### 2. Evaluation Criteria (Metrics & Scoring Rubrics)
+### 2. 評分標準 (Evaluation Criteria / Metrics & Scoring Standards)
 
-- **File Path**: [eval_config.yaml](file:///usr/local/google/home/sylph/Documents/Agy/agents-cli-eval-example/tests/eval/eval_config.yaml)
-- **Description**: Defines metrics to run (`metrics_to_run`) and custom LLM-as-a-Judge metrics (`custom_metrics`):
+- **檔案位置**：[eval_config.yaml](file:///usr/local/google/home/sylph/Documents/Agy/agents-cli-eval-example/tests/eval/eval_config.yaml)
+- **內容說明**：定義了評估預設執行的指標 (`metrics_to_run`) 與自訂的 LLM-as-a-Judge 評分指標 (`custom_metrics`)：
 
-#### ① Couplet Constraint & Embedding Compliance (`couplet_constraint_compliance`)
-Verifies if the agent strictly complies with format and positional requirements:
-- **Character Count Accuracy**: Checks if the character count exactly matches the request (excluding punctuation).
-- **Structure**: Verifies that both the first line (上聯) and second line (下聯) are explicitly labeled.
-- **Positional Embedding**: Checks the exact location of embedded characters (He-Ding, Yan-Zu, Fu-Qian, Kui-Dou, Lian-Li, Sui-Jin).
-- **Scoring Rubric (1 to 5 Stars)**:
-  - `1 Star (Poor)`: Fails character count, or misses embedded characters entirely.
-  - `2 Stars (Fail)`: Correct character count but incorrect embedding positions.
-  - `3 Stars (Average)`: Correct count, embeds the characters but with minor alignment issues.
-  - `4 Stars (Good)`: Correct count, embeddings are in the correct positions.
-  - `5 Stars (Excellent)`: Perfect character count, and embedded characters are exactly at the specified positions.
+#### ① 對聯規範與嵌字格律落點檢驗 (`couplet_constraint_compliance`)
+負責檢驗代理是否精準遵守出題者的硬性條件規範，檢驗項目包含：
+- **上下聯字數精準度**：漢字數是否完全等於題目要求字數（標點符號不計入）。
+- **對聯基本結構**：內容中是否明確包含「上聯」與「下聯」標示。
+- **嵌字格律落點檢驗**：鶴頂格（首字）、雁足格（末字）、腹嵌格（中央）、魁鬥格（首尾對角）、連理格（連續相鄰）、碎錦格（分散出現在句中）。
+- **嚴格評分標準 (1 ~ 5 分)**：
+  - `1分（差勁）`：完全未達字數要求，或完全遺漏嵌字。
+  - `2分（不及格）`：字數正確但嵌字落點完全錯誤（例如鶴頂格嵌到了中間或句尾）。
+  - `3分（普通）`：字數正確，嵌字出現但個別落點有輕微偏差。
+  - `4分（良好）`：精準符合字數，嵌字格律落點基本正確。
+  - `5分（優異）`：字數絲毫不差，且嵌字完全精準落在體格規範的指定落點，無可挑剔。
 
-#### ② Couplet Literary & Aesthetic Quality (`couplet_artistic_quality`)
-Evaluates poetic structure, tonal balance, semantic quality, and elegance:
-- **Scoring Rubric (1 to 5 Stars)**:
-  - `1 Star (Poor)`: Zero semantic alignment, tone mismatch, incoherent phrasing.
-  - `2 Stars (Fail)`: Noticeable alignment/tonal flaws, clichés or awkward phrasing.
-  - `3 Stars (Average)`: Reasonable alignment and tonal harmony, clear phrasing.
-  - `4 Stars (Good)`: Elegant alignment, balanced tones, poetic and evocative phrasing.
-  - `5 Stars (Excellent)`: Outstanding poetic vocabulary, perfect tone harmony, deep imagery and meaning.
+#### ② 對聯文學品質與美學評估 (`couplet_artistic_quality`)
+精通平仄對仗與詩詞美學的文學品質評估，綜合考量「詞性對仗」、「平仄協調」與「語意層次」：
+- **嚴格評分標準 (1 ~ 5 分)**：
+  - `1分（差勁）`：詞性完全不對仗、平仄嚴重失調，且語意模糊或語句不通順。
+  - `2分（不及格）`：詞性對仗或平仄協調有明顯瑕疵，語意勉強可通但過於俗套。
+  - `3分（普通）`：詞性對仗與平仄協調尚可，語意通順清晰。
+  - `4分（良好）`：詞性工整對仗、平仄基本協調，語意流暢且具備文雅情致。
+  - `5分（優異）`：詞性嚴謹工整對仗、平仄和諧協調，且文辭優美雅致、意境深遠。
 
 ---
 
-## 🧪 CLI Commands Guide (Running Tests & Evaluations)
+## 🧪 跑測試案例指令指南 (Running Test Cases & Evaluations)
 
-This project contains two types of tests: **AI Agent Behavior Evaluations (`agents-cli eval`)** and **Automated Python Tests (`pytest`)**.
+本專案提供兩類測試案例：**AI 代理行為評估測試 (`agents-cli eval`)** 與 **自動化單元/整合測試 (`pytest`)**。以下為完整的指令清單：
 
-### 1. AI Agent Evaluation Commands (`agents-cli eval`)
+### 1. 執行 AI 代理評估測試案例 (`agents-cli eval`)
 
-#### ① E2E Local Evaluation Run
+#### ① 一鍵執行預設測試資料集與評分標準
 ```bash
-# 1. Run inference over the dataset and output traces to artifacts/traces/
+# 1. 對測試案例產生執行軌跡 (匯出至 artifacts/traces/)
 agents-cli eval generate
 
-# 2. Grade traces against rubrics defined in tests/eval/eval_config.yaml
+# 2. 依據 tests/eval/eval_config.yaml 的評分標準進行自動打分
 agents-cli eval grade
 ```
 
-#### ② Running Custom Datasets and Selecting Metrics
+#### ② 指定特定測試資料集與輸出目錄
 ```bash
-# Generate traces for a specific dataset file
+# 對指定的資料集 JSON 執行生成
 agents-cli eval generate --dataset tests/eval/datasets/basic-dataset.json --output custom_traces/
 
-# Grade traces selecting specific metrics
-agents-cli eval grade --metrics couplet_constraint_compliance,couplet_artistic_quality --traces custom_traces/
+# 指定評分標準對生成的軌跡檔進行打分
+agents-cli eval grade --metrics couplet_constraint_compliance couplet_artistic_quality --traces custom_traces/
 ```
 
-#### ③ Analyzing and Comparing Evaluation Results
+#### ③ 檢視、聚類分析與比較評分結果
 ```bash
-# Run failure analysis/clustering on grade results
+# 聚類分析評分報告 JSON 中的失敗模式與常規錯誤
 agents-cli eval analyze artifacts/grade_results/<grade_result_json>
 
-# Compare two evaluation runs to check for Regression/Improvements
+# 比較新舊兩份打分結果（檢查是否發生能力迴歸 Regression）
 agents-cli eval compare artifacts/grade_results/<base_json> artifacts/grade_results/<cand_json>
 ```
 
-#### ④ Auto-Synthesize Dataset expansion
+#### ④ 透過 AI 自動合成擴充測試資料集
 ```bash
-# Synthesize 10 new test scenarios using LLM simulators
+# 自動生成 10 組對聯創作測試情境
 agents-cli eval dataset synthesize --count 10
 ```
 
-#### ⑤ A/B Testing Prompts & Model Generations
-This project leverages an **environment-driven** architecture. Developers can A/B test model versions, reasoning depths, and prompts via environment variables without modifying any code in `app/agent.py`:
+#### ⑤ 【進階實驗】動態驅動提示詞與多模型對比（不改動主程式的基準線測試）
+本專案採用 **Environment-driven (環境變數動態驅動)** 架構設計，將「模型選型」、「思考預算」與「提示詞寫法」完全解耦。開發者無須修改 `app/agent.py` 任何一行程式碼，即可在命令列與 CI/CD 中靈活注入變數來執行 A/B 測試對比：
 
-##### 🔧 Configurable Environment Variables
-| Variable Name | Description | Default | Example Options |
+##### 🔧 外部配置環境變數一覽
+| 環境變數名稱 | 功能說明 | 預設值 | 允許替換範例 |
 | :--- | :--- | :--- | :--- |
-| **`COUPLET_MODEL_NAME`** | Underlying GenAI model | `"gemini-3.5-flash"` | `"gemini-2.5-flash"`, `"gemini-3.1-pro-preview"`, `"gemini-2.5-pro"` |
-| **`COUPLET_THINKING_LEVEL`**| Reasoning thinking level | `"medium"` | `"minimal"`, `"medium"`, `"high"` |
-| **`COUPLET_PROMPT_MODE`** | Prompt instruction mode | `"detailed"` (Full rules) | `"simple"` (Concise style) |
+| **`COUPLET_MODEL_NAME`** | 代理底層模型選型 | `"gemini-3.5-flash"` | `"gemini-2.5-flash"`, `"gemini-3.1-pro-preview"`, `"gemini-2.5-pro"` |
+| **`COUPLET_THINKING_LEVEL`**| 推理思考深度等級 | `"medium"` | `"minimal"`, `"medium"`, `"high"` |
+| **`COUPLET_PROMPT_MODE`** | 創作提示詞版本 | `"detailed"` (完整格律版) | `"simple"` (簡易常規版) |
 
-*(Evaluation reports for standard benchmarks are stored in the root `benchmark_examples/` directory for reference).*
+*(測試報告範例皆收錄於根目錄 `benchmark_examples/` 下，內含 JSON 數據與 HTML 視覺化報告)*
 
-##### 💻 A/B Testing Commands and Report Samples
+##### 💻 A/B 對比實驗執行指令與報告樣板
 
-The following commands demonstrate A/B testing configurations. Link templates of HTML reports and JSON diff results are provided below each step for quick review:
+以下示範如何透過命令列注入變數執行 A/B 測試。每個步驟後方附有對應產出的 HTML 單點測試報告與 JSON 兩兩比對報告樣板，方便您快速檢視與對照：
 
-###### 【Experiment A】Prompt Engineering A/B Test (Fixed on Gemini 3.5 Flash + Medium Thinking)
+###### 【實驗 A】提示詞工程對比（固定模型為 Gemini 3.5 Flash + Medium Thinking）
 
-**1. Baseline: Simple Concise Prompt**
+**1. 測試 Baseline：簡易提示詞 (`Simple Prompt`)**
 ```bash
 COUPLET_PROMPT_MODE=simple agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/results_gemini35_flash_simple_prompt.json
 ```
-👉 **[Report Sample: Gemini 3.5 Flash (Simple Prompt) HTML Report](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
+👉 **[範例報告：Gemini 3.5 Flash (簡易提示詞) 單點測試 HTML 報告](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
 
-**2. Candidate: Detailed Poetic Prompt**
+**2. 測試 Candidate：詳細說明提示詞 (`Detailed Prompt`)**
 ```bash
 COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_medium.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/results_gemini35_flash_medium.json
 ```
-👉 **[Report Sample: Gemini 3.5 Flash (Detailed Prompt) HTML Report](./benchmark_examples/results_gemini35_flash_medium.html)**
+👉 **[範例報告：Gemini 3.5 Flash (詳細說明提示詞) 單點測試 HTML 報告](./benchmark_examples/results_gemini35_flash_medium.html)**
 
-**3. Comparison: Prompt Engineering Diff**
+**3. 執行分析報告（觀測提示詞優化對聯格律理解的具體成效）**
 ```bash
 agents-cli eval compare benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json
 ```
-👉 **[Comparison Diff: Simple vs Detailed Prompt JSON Diff](./benchmark_examples/compare_prompt_simple_vs_detailed.json)**
+👉 **[範例報告：簡易提示詞 vs 詳細說明提示詞 HTML 差異對比報告](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
 
 ---
 
-###### 【Experiment B】Model Generation & Tier Comparisons (Fixed on Detailed Prompt + Medium Thinking)
+###### 【實驗 B】多模型世代與架構選型對比（固定為 Detailed Prompt + Medium Thinking）
 
-**1. Baseline: Gemini 2.5 Flash**
+**1. 測試 Baseline：Gemini 2.5 Flash**
 ```bash
 COUPLET_MODEL_NAME="gemini-2.5-flash" agents-cli eval generate --output benchmark_examples/traces_gemini25_flash_medium.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/results_gemini25_flash_medium.json
 ```
-👉 **[Report Sample: Gemini 2.5 Flash HTML Report](./benchmark_examples/results_gemini25_flash_medium.html)**
+👉 **[範例報告：Gemini 2.5 Flash 單點測試 HTML 報告](./benchmark_examples/results_gemini25_flash_medium.html)**
 
-**2. Cross-Generation comparison: 2.5 Flash vs 3.5 Flash**
+**2. 跨世代進化對比 (2.5 Flash vs 3.5 Flash)**
 ```bash
 agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json
 ```
-👉 **[Comparison Diff: Gemini 2.5 Flash vs 3.5 Flash JSON Diff](./benchmark_examples/compare_gemini25_vs_35_flash.json)**
+👉 **[範例報告：Gemini 2.5 Flash vs Gemini 3.5 Flash HTML 差異對比報告](./benchmark_examples/compare_gemini25_vs_35_flash.html)**
 
-**3. Lightweight vs Literary Master comparison: 3.5 Flash vs 3.1 Pro Preview**
-*(Observe `gemini-3.1-pro-preview` score leap in couplet artistic quality)*
+**3. 主力與文學旗艦大師對比 (3.5 Flash vs 3.1 Pro Preview)**
+*(觀測 `gemini-3.1-pro-preview` 在嚴格格律與文學美學 `artistic_quality` 躍升至 4.250 高分的旗艦表現)*
 ```bash
 COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/results_gemini31_pro_medium.json
 agents-cli eval compare benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json
 ```
-👉 **[Report Sample: Gemini 3.1 Pro Preview HTML Report](./benchmark_examples/results_gemini31_pro_medium.html)**  
-👉 **[Comparison Diff: Gemini 3.5 Flash vs 3.1 Pro Preview JSON Diff](./benchmark_examples/compare_gemini35_flash_vs_31_pro.json)**
+👉 **[範例報告：Gemini 3.1 Pro Preview 單點測試 HTML 報告](./benchmark_examples/results_gemini31_pro_medium.html)**  
+👉 **[範例報告：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview HTML 差異對比報告](./benchmark_examples/compare_gemini35_flash_vs_31_pro.html)**
 
-**4. Tier Architecture comparison: 2.5 Flash vs 2.5 Pro**
-*(Observe Pro model performance jump in classical tone and semantic symmetry)*
+**4. 跨架構能力對比 (2.5 Flash vs 2.5 Pro)**
+*(觀測 Pro 架構模型在古典對仗與平仄意境上的大師級提升)*
 ```bash
 COUPLET_MODEL_NAME="gemini-2.5-pro" agents-cli eval generate --output benchmark_examples/traces_gemini25_pro_medium.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/results_gemini25_pro_medium.json
 agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json
 ```
-👉 **[Report Sample: Gemini 2.5 Pro HTML Report](./benchmark_examples/results_gemini25_pro_medium.html)**  
-👉 **[Comparison Diff: Gemini 2.5 Flash vs 2.5 Pro JSON Diff](./benchmark_examples/compare_gemini25_flash_vs_pro.json)**
+👉 **[範例報告：Gemini 2.5 Pro 單點測試 HTML 報告](./benchmark_examples/results_gemini25_pro_medium.html)**  
+👉 **[範例報告：Gemini 2.5 Flash vs Gemini 2.5 Pro HTML 差異對比報告](./benchmark_examples/compare_gemini25_flash_vs_pro.html)**
 
 ---
 
-### 2. Running Python Unit & Integration Tests (`pytest`)
+### 2. 執行自動化單元與整合測試案例 (`pytest`)
 
 ```bash
-# Run all python tests
+# 執行所有自動化測試案例
 uv run pytest
 
-# Run only unit tests
-uv run pytest tests/unit/
+# 僅執行單元測試案例 (tests/unit/)
+uv run pytest tests/unit
 
-# Run only integration tests
-uv run pytest tests/integration/
+# 僅執行整合測試案例 (tests/integration/)
+uv run pytest tests/integration
 ```
 
 ---
 
-### 3. Cloud-side Deploy & Remote Eval
+### 3. 雲端部署與線上遠端評估服務 (`Cloud-side Deploy & Remote Eval`)
 
-Once local tests and evaluations are satisfied, developers can deploy the agent to Google Cloud (such as Vertex AI Agent Runtime or Cloud Run) and launch high-concurrency evaluation tasks using **Agent Platform Eval Service** on the cloud:
+當本地測試與合規評估滿分後，開發者可一鍵將機器人部署至 Google Cloud 生產環境（如 Vertex AI Agent Runtime 全託管引擎或 Cloud Run），並啟動雲端非同步的 **Agent Platform Eval Service** 對線上已部署的實例進行高併發推論對話測試與 LLM-as-a-Judge 評分：
 
 ```bash
 # ---------------------------------------------------------------------
-# ① Initialize cloud infrastructure (Generate Dockerfile / Terraform)
+# ① 初始化雲端託管基礎建設架構 (生成 Dockerfile / Terraform 腳本)
 # ---------------------------------------------------------------------
 agents-cli scaffold enhance . --deployment-target agent_runtime -y
 
 # ---------------------------------------------------------------------
-# ② Build and deploy to the cloud (supports async deployment with --no-wait)
+# ② 正式建置並部署上雲 (支援非同步啟動 --no-wait)
 # ---------------------------------------------------------------------
 agents-cli deploy --project <YOUR_PROJECT_ID> --no-confirm-project --no-wait
 
-# Check deployment status
+# 隨時查詢後端推論引擎部署進度狀態
 agents-cli deploy --status
 
 # ---------------------------------------------------------------------
-# ③ Run cloud-side remote inference and LLM grading
+# ③ 執行雲端線上推論與自動裁判評估 (由雲端平行併發處理，零本機運算壓力)
 # ---------------------------------------------------------------------
-# Submit the evaluation dataset to evaluate a deployed reasoning engine
+# 將題庫提交至雲端，對線上 Reasoning Engine 跑推論對話 + LLM 裁判自動打分
 agents-cli eval submit \
   --dataset tests/eval/datasets/basic-dataset.json \
   --dest gs://<YOUR_GCS_BUCKET_NAME> \
   --resource-name "projects/<PROJECT_ID>/locations/<LOCATION>/reasoningEngines/<REASONING_ENGINE_ID>"
 
-# Check status and download remote evaluation results (add --region if submitted with a specific region)
+# 非同步輪詢與下載雲端產出的評估報告 (若 submit 時有帶 --region，此處也必須加上對應 region)
 agents-cli eval results --run-id <EVAL_RUN_RESOURCE_NAME> --region <REGION>
 ```
 ```

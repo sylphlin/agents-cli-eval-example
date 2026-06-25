@@ -1,4 +1,4 @@
-[English (en)](README.md) | [繁體中文 (zh-TW)](README.zh-TW.md) | [简体中文 (zh-CN)](README.zh-CN.md)
+[English (en)](README.en.md) | [繁體中文 (zh-TW)](README.md) | [简体中文 (zh-CN)](README.zh-CN.md)
 
 # 对联创作机器人与 agents-cli eval 评估范例 (agents-cli-eval-example)
 
@@ -146,20 +146,20 @@ agents-cli eval dataset synthesize --count 10
 COUPLET_PROMPT_MODE=simple agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/results_gemini35_flash_simple_prompt.json
 ```
-👉 **[检视样板：Gemini 3.5 Flash (简易提示词) 单点测试 HTML 报告](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
+👉 **[范例报告：Gemini 3.5 Flash (简易提示词) 单点测试 HTML 报告](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
 
 **2. 测试 Candidate：详细说明提示词 (`Detailed Prompt`)**
 ```bash
 COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_medium.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/results_gemini35_flash_medium.json
 ```
-👉 **[检视样板：Gemini 3.5 Flash (详细说明提示词) 单点测试 HTML 報告](./benchmark_examples/results_gemini35_flash_medium.html)**
+👉 **[范例报告：Gemini 3.5 Flash (详细说明提示词) 单点测试 HTML 報告](./benchmark_examples/results_gemini35_flash_medium.html)**
 
 **3. 执行分析报告（观测提示词优化对联格律理解的具体成效）**
 ```bash
 agents-cli eval compare benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json
 ```
-👉 **[检视样板：简易提示词 vs 详细说明提示词 JSON 差异对比报告](./benchmark_examples/compare_prompt_simple_vs_detailed.json)**
+👉 **[范例报告：简易提示词 vs 详细说明提示词 HTML 差异对比报告](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
 
 ---
 
@@ -170,13 +170,13 @@ agents-cli eval compare benchmark_examples/results_gemini35_flash_simple_prompt.
 COUPLET_MODEL_NAME="gemini-2.5-flash" agents-cli eval generate --output benchmark_examples/traces_gemini25_flash_medium.json
 agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/results_gemini25_flash_medium.json
 ```
-👉 **[检视样板：Gemini 2.5 Flash 单点测试 HTML 报告](./benchmark_examples/results_gemini25_flash_medium.html)**
+👉 **[范例报告：Gemini 2.5 Flash 单点测试 HTML 报告](./benchmark_examples/results_gemini25_flash_medium.html)**
 
 **2. 跨世代进化对比 (2.5 Flash vs 3.5 Flash)**
 ```bash
 agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json
 ```
-👉 **[检視样板：Gemini 2.5 Flash vs Gemini 3.5 Flash JSON 差异对比报告](./benchmark_examples/compare_gemini25_vs_35_flash.json)**
+👉 **[检視样板：Gemini 2.5 Flash vs Gemini 3.5 Flash HTML 差异对比报告](./benchmark_examples/compare_gemini25_vs_35_flash.html)**
 
 **3. 主力与文学旗舰大师对比 (3.5 Flash vs 3.1 Pro Preview)**
 *(观测 `gemini-3.1-pro-preview` 在严格格律与文学美学 `artistic_quality` 跃升至 4.250 高分的旗舰表现)*
@@ -185,8 +185,8 @@ COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output be
 agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/results_gemini31_pro_medium.json
 agents-cli eval compare benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json
 ```
-👉 **[检视样板：Gemini 3.1 Pro Preview 单点测试 HTML 报告](./benchmark_examples/results_gemini31_pro_medium.html)**  
-👉 **[检视样板：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview JSON 差异对比报告](./benchmark_examples/compare_gemini35_flash_vs_31_pro.json)**
+👉 **[范例报告：Gemini 3.1 Pro Preview 单点测试 HTML 报告](./benchmark_examples/results_gemini31_pro_medium.html)**  
+👉 **[范例报告：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview HTML 差异对比报告](./benchmark_examples/compare_gemini35_flash_vs_31_pro.html)**
 
 **4. 跨架构能力对比 (2.5 Flash vs 2.5 Pro)**
 *(观测 Pro 架构模型在古典对仗与平仄意境上的大师级提升)*
@@ -195,8 +195,8 @@ COUPLET_MODEL_NAME="gemini-2.5-pro" agents-cli eval generate --output benchmark_
 agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/results_gemini25_pro_medium.json
 agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json
 ```
-👉 **[检视样板：Gemini 2.5 Pro 单点测试 HTML 报告](./benchmark_examples/results_gemini25_pro_medium.html)**  
-👉 **[检视样板：Gemini 2.5 Flash vs Gemini 2.5 Pro JSON 差异对比报告](./benchmark_examples/compare_gemini25_flash_vs_pro.json)**
+👉 **[范例报告：Gemini 2.5 Pro 单点测试 HTML 报告](./benchmark_examples/results_gemini25_pro_medium.html)**  
+👉 **[范例报告：Gemini 2.5 Flash vs Gemini 2.5 Pro HTML 差异对比报告](./benchmark_examples/compare_gemini25_flash_vs_pro.html)**
 
 ---
 
