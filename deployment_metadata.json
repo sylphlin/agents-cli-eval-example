@@ -1,13 +1,6 @@
 {
-  "remote_agent_runtime_id": "projects/326905670654/locations/us-east1/reasoningEngines/6076868825322618880",
+  "remote_agent_runtime_id": "projects/326905670654/locations/us-central1/reasoningEngines/7725492502928556032",
   "deployment_target": "agent_runtime",
   "is_a2a": false,
-  "deployment_timestamp": "2026-06-25T03:57:39.888197+00:00",
-  "pending_operation": {
-    "operation_name": "projects/326905670654/locations/us-central1/reasoningEngines/7725492502928556032/operations/3854517910168928256",
-    "project": "sylph-demo-356407",
-    "location": "us-central1",
-    "deployment_target": "agent_runtime",
-    "started_at": "2026-06-25T04:05:37.753997+00:00"
-  }
+  "deployment_timestamp": "2026-06-25T04:41:14.893925+00:00"
 }
