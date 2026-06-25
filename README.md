@@ -29,9 +29,9 @@ agents-cli-eval-example/
 ├── AGENTS.md                      # AI 輔助開發準則指南
 └── pyproject.toml                 # 專案相依套件與設定
 ```
- 
---- 
- 
+
+---
+
 ## 🎯 測試案例與評分標準位置說明
 
 進行 AI 代理評估 (`agents-cli eval`) 時，最核心的兩大設定對應於本專案的 `tests/eval/` 目錄：
@@ -179,7 +179,6 @@ agents-cli eval submit \
 
 # 非同步輪詢與下載雲端產出的評估報告 (若 submit 時有帶 --region，此處也必須加上對應 region)
 agents-cli eval results --run-id <EVAL_RUN_RESOURCE_NAME> --region <REGION>
-```
 ```
 
 ---
