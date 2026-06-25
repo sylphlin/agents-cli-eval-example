@@ -12,9 +12,9 @@ agents-cli-eval-example/
 │   ├── agent.py                   # 對聯創作機器人主程式與創作提示詞設定
 │   ├── app_utils/                 # 應用程式輔助工具與遙測 (Telemetry) 模組
 │   └── fast_api_app.py            # FastAPI 本機開發服務介面
+├── benchmark_examples/              # 💡 官方標準基準與對比實驗成果檔 (含 JSON 與 HTML Report, 受 Git 版控)
 ├── tests/                         # 單元測試、整合測試與代理評估測試案例
 │   ├── eval/                      # 💡 [重點目錄] 測試案例與評分標準核心設定
-│   │   ├── benchmark_examples/    # 標準教學對比實驗 Traces 與結果檔 (受 Git 版控)
 │   │   ├── datasets/              # 評估測試資料集目錄
 │   │   │   ├── basic-dataset.json # 標準對聯創作評估測試題庫 (8大典型場景)
 │   │   │   └── README.md          # 資料集結構與自訂資料集說明指南
@@ -131,7 +131,7 @@ agents-cli eval dataset synthesize --count 10
 | **`COUPLET_THINKING_LEVEL`**| 推理思考深度等級 | `"medium"` | `"minimal"`, `"medium"`, `"high"` |
 | **`COUPLET_PROMPT_MODE`** | 創作提示詞版本 | `"detailed"` (完整格律版) | `"simple"` (簡易常規版) |
 
-*(官方標準基準實驗報告皆收錄於 `tests/eval/benchmark_examples/` 下，受 Git 正常追蹤)*
+*(官方標準基準實驗報告皆收錄於根目錄 `benchmark_examples/` 下，內含 JSON 數據與 HTML 視覺化報告，受 Git 正常追蹤)*
 
 ##### 💻 A/B 對比實驗執行指令
 
@@ -140,31 +140,40 @@ agents-cli eval dataset synthesize --count 10
 # 實驗 A：提示詞工程 A/B 測試（固定為 Gemini 3.5 Flash + Medium Thinking）
 # =====================================================================
 # 1. 測試 Baseline：簡易提示詞 (Simple Prompt)
-COUPLET_PROMPT_MODE=simple agents-cli eval generate --output tests/eval/benchmark_examples/traces_gemini35_flash_simple_prompt.json
-agents-cli eval grade --traces tests/eval/benchmark_examples/traces_gemini35_flash_simple_prompt.json --output tests/eval/benchmark_examples/results_gemini35_flash_simple_prompt.json
+COUPLET_PROMPT_MODE=simple agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/results_gemini35_flash_simple_prompt.json
 
 # 2. 測試 Candidate：詳細說明提示詞 (Detailed Prompt)
-COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output tests/eval/benchmark_examples/traces_gemini35_flash_medium.json
-agents-cli eval grade --traces tests/eval/benchmark_examples/traces_gemini35_flash_medium.json --output tests/eval/benchmark_examples/results_gemini35_flash_medium.json
+COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/results_gemini35_flash_medium.json
 
 # 3. 執行提示詞優化前後的差異比較報告
-agents-cli eval compare tests/eval/benchmark_examples/results_gemini35_flash_simple_prompt.json tests/eval/benchmark_examples/results_gemini35_flash_medium.json
+agents-cli eval compare benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json
 
 
 # =====================================================================
 # 實驗 B：多模型世代與架構選型對比（固定為 Detailed Prompt + Medium Thinking）
 # =====================================================================
 # 1. 跨世代進化對比 (2.5 Flash vs 3.5 Flash)
-agents-cli eval compare tests/eval/benchmark_examples/results_gemini25_flash_medium.json tests/eval/benchmark_examples/results_gemini35_flash_medium.json
+agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json
 
 # 2. 輕量級與頂級大師對比 (3.5 Flash vs 3.1 Pro Preview)
 # (觀測 3.1 Pro Preview 在文學美學品質 artistic_quality 躍升至 4.250 高分)
-COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output tests/eval/benchmark_examples/traces_gemini31_pro_medium.json
-agents-cli eval compare tests/eval/benchmark_examples/results_gemini35_flash_medium.json tests/eval/benchmark_examples/results_gemini31_pro_medium.json
+COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
+agents-cli eval compare benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json
 
 # 3. 跨架構能力對比 (2.5 Flash vs 2.5 Pro)
-agents-cli eval compare tests/eval/benchmark_examples/results_gemini25_flash_medium.json tests/eval/benchmark_examples/results_gemini25_pro_medium.json
+agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json
 ```
+
+##### 📊 官方基準評估 HTML Report 預覽連結
+我們在專案根目錄的 `benchmark_examples/` 下預先跑出了完整的視覺化評估報告（內含完整的模型思考過程 Thoughts、生成作品與 LLM-as-a-Judge 評分依據說明）。您可隨時自行執行上方指令跑分，也可點擊以下連結直接查看官方跑出的結果：
+
+- **[檢視 HTML 報告：Gemini 2.5 Flash (Baseline)](./benchmark_examples/results_gemini25_flash_medium.html)**
+- **[檢視 HTML 報告：Gemini 3.5 Flash (Candidate A - 跨世代主力進階)](./benchmark_examples/results_gemini35_flash_medium.html)**
+- **[檢視 HTML 報告：Gemini 2.5 Pro (Candidate B - 跨架構古風進階)](./benchmark_examples/results_gemini25_pro_medium.html)**
+- **[檢視 HTML 報告：Gemini 3.1 Pro Preview (Candidate C - 嚴格格律與文學美學雙冠大師)](./benchmark_examples/results_gemini31_pro_medium.html)**
+- **[檢視 HTML 報告：Gemini 3.5 Flash 簡易提示詞對照版 (提示詞工程實驗 A)](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
 
 ---
 
