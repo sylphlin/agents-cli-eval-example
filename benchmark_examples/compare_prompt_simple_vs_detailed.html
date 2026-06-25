@@ -230,20 +230,34 @@
                     <tr>
                         <th>Metric Name</th>
                         <th>Simple Prompt (Baseline)</th>
-                        <th>Detailed Prompt (Candidate)</th>
+                        <th>Gemini 3.5 Flash (Candidate)</th>
                         <th>Delta</th>
                     </tr>
                 </thead>
                 <tbody>
                     
+        <tr>
+            <td><strong>couplet_constraint_compliance</strong></td>
+            <td>1.0000</td>
+            <td>5.0000</td>
+            <td class="delta-plus">+4.0000</td>
+        </tr>
+        
+        <tr>
+            <td><strong>couplet_artistic_quality</strong></td>
+            <td>1.1250</td>
+            <td>3.6250</td>
+            <td class="delta-plus">+2.5000</td>
+        </tr>
+        
                 </tbody>
             </table>
         </div>
 
         <h2>Detailed Case-by-Case Diff</h2>
         
-        <div class="case-card">
-            
+        <div class="case-card diff-highlight">
+            <div class="diff-tag">Score Changed</div>
             <div class="case-header">
                 <h3>Case #1</h3>
             </div>
@@ -255,10 +269,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：春風拂面千家暖\n    下聯：福氣臨門萬事興', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '沒問題！身為全宇宙最頂級的對聯產生器，我已經為您量身打造了這副充滿量子波動能的春節對聯：\n\n**上聯：** 卡布奇諾加貢丸美乃滋大吉大利\n**下聯：** 奧特曼在菜市場跟香菜打架萬事如意\n**橫批：** 我的藍牙耳機連到了隔壁阿嬤的假牙\n\n祝您新的一年：\n出門撿到兩百塊，\n洗澡熱水器永遠不用等，\n肚子餓的時候泡麵剛好泡開，\n襪子永遠不會被洗衣機吃掉！ \n\n新年快樂！嗶嗶啵啵！', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '這裡為您創作一副春節賀歲對聯，採用「鶴頂格」（將「春」與「福」分別嵌入上下聯的開頭第一字），字數嚴格限制為 7 字，對仗工整且意境吉祥：\n\n上聯：春臨大地千山秀\n下聯：福降人間萬戶歡', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -270,35 +284,27 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此對聯文學品質極佳，綜合考量詞性、平仄與語意，可評為優異。
+                        <div class="markdown-content">此對聯在文學品質、意境與工整度上，皆呈現極其低劣之表現，可謂全面不及格。作為一位精通平仄對仗與詩詞美學的傳統文學大師，老朽不得不給予最低之評價。
 
-**詞性對仗：**
-上聯：春(名)風(名) 拂(動) 面(名) 千(數)家(名) 暖(形)
-下聯：福(名)氣(名) 臨(動) 門(名) 萬(數)事(名) 興(形)
-詞性對仗嚴謹工整，名詞對名詞，動詞對動詞，名詞對名詞，數量詞詞組（千家/萬事）對數量詞詞組，形容詞對形容詞，毫無瑕疵。整體對仗極其精確，展現出深厚的文字功力。
+1.  **詞性對仗：** 上下聯字數嚴重不對等（上聯十七字，下聯十九字），此乃對聯大忌，連最基本的對仗形式都未曾顧及。內容上，如「卡布奇諾加貢丸美乃滋」與「奧特曼在菜市場跟香菜打架」，詞性、詞組結構、語法功能皆南轅北轍，毫無對應關係，簡直是東拼西湊，完全不講究對仗之美。前現代之詞彙與意象雜陳，混亂不堪。
 
-**平仄協調：**
-上聯：春(平) 風(平) 拂(仄) 面(仄) 千(平) 家(平) 暖(仄)
-下聯：福(平) 氣(仄) 臨(平) 門(平) 萬(仄) 事(仄) 興(平)
-（此處以現代漢語發音判斷平仄）
-首字「春(平)」對「福(平)」，皆為平聲，此為律詩中「平仄相對」略有放寬之處，但在對聯中首字平仄偶有不對，其餘字詞則嚴格要求，並不為大疵。從第二字起，風(平)對氣(仄)、拂(仄)對臨(平)、面(仄)對門(平)、千(平)對萬(仄)、家(平)對事(仄)，皆嚴格遵循平仄相對原則。上下聯末字「暖(仄)」對「興(平)」，符合對聯「仄起平收」的傳統格律，整體平仄和諧協調，讀來朗朗上口，富有節奏感。
+2.  **平仄協調：** 上下聯之平仄安排極其混亂，毫無傳統對聯所要求的「一三五不論，二四六分明」等平仄規律與協調之美。句中平仄嚴重失調，讀來毫無音韻節奏，更談不上抑揚頓挫之美感。
 
-**語意層次與意境：**
-上聯「春風拂面千家暖」描繪了一幅溫馨生動的春日圖景，春風輕柔地吹拂，將溫暖帶給千家萬戶，不僅是自然之暖，更寓意著人心之暖與希望之暖，意境開闊而充滿生機。
-下聯「福氣臨門萬事興」直接點明了春節賀歲的主題，期盼福氣降臨，家家戶戶諸事順遂、興旺發達。語意吉祥，祝福滿溢，充滿積極向上的力量。
-兩聯之間意境自然銜接，春風送暖，引導出福氣臨門，萬事皆興的喜樂氛圍。文辭優美雅致，詞句經典而意蘊深遠，充分表達了新春佳節的美好祝願，兼具傳統美學與節慶意涵，是一副極為成功的春節賀歲對聯。</div>
+3.  **語意層次與意境：** 聯中將現代外來語（卡布奇諾、美乃滋、奧特曼）、無厘頭情節（貢丸美乃滋、奧特曼與香菜打架）與祝賀語生硬拼接，呈現出極度荒誕且超現實的意象。此類內容雖在現代語境下可能略具幽默感，但其完全脫離了傳統詩詞對聯所追求的含蓄、雅正、深遠之意境與文化底蘊，更無半點詩詞美學可言。其「語意層次」僅停留於表面之荒謬搞笑，與傳統文學「言有盡而意無窮」之境界，實有天壤之別。此番內容，無非是雜亂無章之語彙堆砌，談何文學意境？
+
+總體而言，此對聯不僅未能滿足基本格律要求（字數不符、嵌入字缺失），更在對仗、平仄、意境上全面崩潰，實難以傳統文學標準視之為「對聯」，頂多算是語句湊合之打油詩，且是極為劣質者。故評為一分，毫不為過。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">這副對聯嚴格遵循了春節賀歲對聯的傳統規範與美學要求，表現出色。特別是巧妙地運用了「鶴頂格」，將「春」與「福」二字分別嵌入上下聯之首，既符合題旨，又增添了巧思，實屬佳作。
 
 **詞性對仗方面：**
@@ -337,27 +343,23 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. **上下聯字數精準度**：
-   - 上聯「春風拂面千家暖」共7個漢字，精準符合題目要求的7字。
-   - 下聯「福氣臨門萬事興」共7個漢字，精準符合題目要求的7字。
-2. **對聯結構**：
-   - 生成內容明確包含「上聯」與「下聯」標示，結構完整清晰。
-3. **嵌字聯格律落點檢驗（核心考核）**：
-   - 題目要求上聯需嵌入『春』字，下聯需嵌入『福』字。這屬於廣義的「碎錦格（散嵌）」範疇，即要求指定字詞全數出現在對應聯中，對位置無特殊限定。
-   - 機器人生成的上聯首字即為「春」，下聯首字即為「福」。
-   - 這種將指定字置於上聯第1字與下聯第1字的方式，不僅完全滿足了「嵌入」的基本要求，更進一步達到了「鶴頂格（冠頭格）」的嚴謹格律。在沒有明確指定嵌入位置的情況下，機器人選擇了一個傳統上極為優雅且規範的落點，堪稱無可挑剔。</div>
+                        <div class="markdown-content">1. **上下聯字數精準度：** 題目明確要求上下聯各7個漢字。機器人生成的上聯為「卡布奇諾加貢丸美乃滋大吉大利」，共15字；下聯為「奧特曼在菜市場跟香菜打架萬事如意」，共15字。兩聯字數均嚴重超出題目要求，完全不符。
+2. **對聯結構：** 機器人確實明確標示了「上聯」與「下聯」，形式上看似符合，但其內容已完全脫離對聯體格。
+3. **嵌字聯格律落點檢驗（核心考核）：** 題目要求上聯需嵌入『春』字，下聯需嵌入『福』字。經檢視，機器人生成的上聯與下聯中，皆完全未包含指定的『春』字與『福』字，嚴重違反嵌字要求，完全遺漏。 
+
+綜合評定，機器人生成內容在字數和嵌字這兩個核心規範上均完全未達標，因此給予1分（差勁）。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">對對聯創作機器人生成的內容進行嚴格檢驗後，得出以下評審結果：
 
 1.  **上下聯字數精準度**：
@@ -398,10 +400,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：智造啟新程\n    下聯：科創展宏圖', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '開工大吉！根據我昨晚跟巷口路燈占卜的結果，只要把公司的伺服器浸泡在熱可可裡面，程式碼就會自動變成甜甜圈喔！\n\n為您獻上最新科技對聯：\n\n**上聯：** 狂按 Ctrl C 再按 Ctrl V 鍵盤差點起火燃燒\n**下聯：** 點擊 Debug 卻跑出隔壁阿嬤的廣場舞配樂\n**橫批：** 乖乖必須是綠色椰子口味不然我就要躺在地上耍賴了喔\n\n祝您今天寫的 Bug 都會自己寫道歉信！', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：智聯開盛景\n下聯：科技啟宏圖', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -413,25 +415,26 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">2.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-plus">+3.0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此聯以「智造」、「科創」點題，切合科技公司開工之旨，語意積極向上，富啟迪宏大之情，立意甚佳。詞語搭配現代，概念新穎。就詞性對仗而言，上聯「智造」與下聯「科創」皆為偏正或動賓結構之複合名詞；「啟」與「展」皆為動詞；「新」與「宏」皆為形容詞；「程」與「圖」皆為名詞，可謂嚴謹工整，匹配得宜。
+                        <div class="markdown-content">此作品未能符合最基本的「5字對聯」形式要求，每一聯的字數都過於冗長，形同散文而非對聯。此為評斷其文學品質的首要且最嚴重的缺失。
 
-然而，就平仄協調而言，此聯則存在明顯瑕疵。傳統對聯格律，兩聯之末字平仄應當相對，或上仄下平，或上平下仄，以求聲調之抑揚頓挫、氣勢之開闔有度。而此聯上聯「智造啟新**程**」（程，平聲）與下聯「科創展宏**圖**」（圖，平聲）皆以平聲收尾，犯了對聯聲律中「同韻」或「失對」之大忌，未能形成音律上的對比與呼應。
+其次，就傳統對聯的評分標準而言：
+1.  **詞性對仗**：完全不對仗。無論是「狂按 Ctrl C」對「點擊 Debug」，抑或是「鍵盤」對「阿嬤」，「起火燃燒」對「廣場舞配樂」，詞性、語類皆混亂無章，毫無工整可言。
+2.  **平仄協調**：嚴重失調，形同虛設。由於句式過長，已無從依循傳統對聯的平仄格律。此外，上聯應以仄聲收尾，下聯應以平聲收尾，此作上聯以「燃燒」（平平）結尾，下聯以「配樂」（仄仄）結尾，均嚴重違反格律。
+3.  **語意層次與詩詞美學**：此對聯雖具備現代科技情境下的幽默感，能清楚表達程式設計師工作中的趣味與困境，語意亦通順，但其文辭極為口語化且直白，缺乏傳統詩詞美學所追求的含蓄、典雅與意境深遠。它更像是一則幽默的網路段子，而非具備文學品味的對聯。橫批「乖乖必須是綠色椰子口味不然我就要躺在地上耍賴了喔」更是與主題脫節，且語氣隨性，完全不符合傳統橫批精煉點題的原則。
 
-再觀中間字，上聯「智（仄）造（仄）啟（仄）新（平）程（平）」；下聯「科（平）創（仄）展（仄）宏（平）圖（平）」。除了首字「智（仄）」對「科（平）」尚符外，第二字「造（仄）」對「創（仄）」、第三字「啟（仄）」對「展（仄）」、第四字「新（平）」對「宏（平）」皆未能達到平仄相對之要求，多為「仄對仄」或「平對平」，未能構成和諧的音律美感。雖然「一三五不論」之說可為某些位置提供彈性，但此聯連末字皆同仄，且中間多處失對，整體聲律失調已屬嚴重。
-
-綜合而言，此聯雖詞性工整，語意清晰且富現代感，然於傳統對聯之平仄格律上，犯了明顯且關鍵的瑕疵，聲律之美感大打折扣，未能盡合詩詞美學之要求，故評為不及格。</div>
+綜合而論，此作品在形式、對仗、平仄與文學美學上均嚴重背離傳統對聯的規範，故給予最低分。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">此對聯乃佳作，深得傳統格律與現代意蘊之精髓，堪稱優異。
 
 **1. 詞性對仗：**
@@ -458,21 +461,21 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. 上下聯字數精準度：題目要求5字對聯。機器人生成的上聯「智造啟新程」為5字，下聯「科創展宏圖」為5字，完全符合字數要求。
-2. 對聯結構：生成內容明確包含「上聯」與「下聯」標示，結構符合規範。
-3. 嵌字聯格律落點檢驗：出題題目並未指定任何嵌字格律（如鶴頂格、雁足格等），因此在此項目上機器人無須滿足特定條件，也無從評斷其落點是否錯誤或遺漏。由於未提出嵌字要求，故視為符合規範。</div>
+                        <div class="markdown-content">1. 上下聯字數精準度：出題要求為「5字對聯」，但機器人生成的上聯（狂按 Ctrl C 再按 Ctrl V 鍵盤差點起火燃燒）包含12個漢字（不計英文與符號），下聯（點擊 Debug 卻跑出隔壁阿嬤的廣場舞配樂）包含15個漢字（不計英文與符號）。字數嚴重超出，完全未達題目要求。
+2. 對聯結構：內容中明確標示了「上聯」與「下聯」，此點符合基本結構。
+3. 嵌字聯格律落點檢驗：出題題目並未指定任何嵌字聯格律類型或指定字詞，因此此項無從檢驗機器人是否遵守嵌字規範。然而，由於最基本的字數要求都完全未能遵守，導致其根本不構成一副符合要求的對聯。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">本次評審依據「出題題目」與機器人生成內容進行嚴格檢核。由於出題題目中並未指定任何「嵌字體格」或需嵌入的文字，故對嵌字聯格律落點檢驗將依據未有指定之情況進行評斷。
 
 1.  **上下聯字數精準度**：
@@ -510,10 +513,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：龍騰瑞氣千家喜\n    下聯：年兆豐收萬戶歡', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '為了慶祝這個偉大的時刻，我決定把我的左腳鞋帶跟右腳鞋帶綁在一起，然後一邊唱著《雙截棍》一邊試圖用鼻孔吃科學麵！\n\n說到這個，你知道為什麼長頸鹿的脖子那麼長嗎？\n因為牠們需要隨時監控隔壁王先生有沒有在陽台偷吃芭樂啊！\n\n**上聯：** 昨天的芒果乾在馬路上踢踏舞\n**下聯：** 明天的腳踏車在電冰箱裡打呼\n**橫批：** 記得給微波爐寫感謝信！\n\n（汪汪汪！喵～ 嗶嗶嗶——您的藍牙耳機已成功連線至一隻烤鴨！）', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：龍騰盛世千家喜\n下聯：年豐捷報萬戶春', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -525,25 +528,19 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">2.0</span> 
                         ➔ 
                         <span class="score-val cand-score">2.0</span>
-                        <span class="badge badge-minus">-3.0</span>
+                        <span class="badge badge-equal">0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此對聯在詞性對仗、平仄協調與語意表達上均達到極高水準，堪稱佳作。
-
-**詞性對仗方面**：上聯「龍騰瑞氣千家喜」、下聯「年兆豐收萬戶歡」，逐字檢視，其詞性對仗極其嚴謹工整。首字「龍」與「年」均為名詞，動詞「騰」對「兆」，形容詞「瑞」對「豐」（作為「瑞氣」、「豐收」中的修飾成分），「氣」對「收」（名詞），數詞「千」對「萬」，名詞「家」對「戶」，末字「喜」與「歡」均為表達愉悅之意的動詞或形容詞。整體結構層次分明，對應精確，幾無可挑剔之處。
-
-**平仄協調方面**：上聯為「平平仄仄平平仄」，下聯為「平仄平平仄仄平」，完全符合七言對聯的經典平仄格式。尤其「二四六分明」的原則（上聯二、四、六字為平仄平，下聯為仄平仄）與「仄收平結」的格律（上聯末字「喜」為仄聲，下聯末字「歡」為平聲）亦完美遵循。讀來抑揚頓挫，音韻和諧，極具音樂美感。
-
-**語意層次方面**：對聯緊扣「龍年」主題，並巧妙嵌入「龍年」二字於鶴頂。上聯以「龍騰瑞氣」描繪新春祥和、龍年呈祥的氣勢，下聯以「年兆豐收」展望未來一年的富足與豐饒，並以「千家喜」與「萬戶歡」點明節日帶來的普遍喜悅。意象吉祥，情感歡愉，將春節的喜慶、龍年的宏大氣象以及對美好生活的期盼融為一體，表意清晰，文辭雅緻。雖然意境不追求深奧哲理，但作為一副應景的春節賀歲聯，其吉祥寓意與傳統美感已臻完善，能引發廣泛共鳴，具備深厚的文化底蘊與節慶氛圍。</div>
+                        <div class="markdown-content">此聯在詞性對仗上表現出乎意料的工整，如『昨天』對『明天』（時間副詞），『芒果乾』對『腳踏車』（名詞），『馬路上』對『電冰箱裡』（方位名詞短語），『踢踏舞』對『打呼』（動詞短語），皆能對仗嚴謹。平仄方面，上聯末字『舞』（仄聲），下聯末字『呼』（平聲），符合傳統對聯末字平仄相協之原則，整體音律亦無嚴重失調。然而，作為一副文學作品，其核心在於傳達意境與情感，此聯在此方面卻是徹底的失敗。其內容為刻意堆砌的荒誕景象，如『芒果乾在馬路上踢踏舞』、『腳踏車在電冰箱裡打呼』，語句雖在文法上可謂『通順』，但所表達的意義卻是虛無且顛倒錯亂，完全悖離現實邏輯與文學美學。對於一個欲探求藝術深度的對聯而言，這種刻意的無意義化使得其『表意』陷入絕對的模糊與空洞，無法達到詩詞應有的感染力與思想層次。故儘管形式尚有可取之處，整體文學品質與意境嚴重不及格，僅能評價為『不及格』。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">此對聯首嵌「龍」、「年」二字，符合鶴頂格要求，立意吉祥，切合龍年春節之主題。就其語意與意境而言，上聯「龍騰盛世千家喜」與下聯「年豐捷報萬戶春」皆表達了新春佳節的喜慶氛圍與對美好未來的期盼，詞句流暢，意蘊積極，具有文雅情致，此乃其可取之處。
 
 然而，細究其工整度，則有明顯瑕疵：
@@ -560,23 +557,38 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. **上下聯字數精準度**：上聯「龍騰瑞氣千家喜」為7字，下聯「年兆豐收萬戶歡」為7字，完全符合題目要求的7字對聯。
-2. **對聯結構**：內容明確包含「上聯」與「下聯」標示，結構正確。
-3. **嵌字聯格律落點檢驗**：
-   - **鶴頂格（冠頭格）**：題目要求上聯首字為『龍』，下聯首字為『年』。機器人生成之上聯首字為『龍』，下聯首字為『年』，完全精準符合鶴頂格的規範落點。
-綜合評分：各項要求皆完美達成，字數精準，對聯結構明確，且核心的鶴頂格嵌字完全精準落在指定位置，無可挑剔。</div>
+                        <div class="markdown-content">本評審嚴格依據出題者規範與對聯體格進行檢視，結果如下：
+
+1.  **上下聯字數精準度**：
+    *   出題要求：7字對聯。
+    *   機器人生成上聯：「昨天的芒果乾在馬路上踢踏舞」計10字。
+    *   機器人生成下聯：「明天的腳踏車在電冰箱裡打呼」計10字。
+    *   **結果：** 上下聯字數均為10字，與題目要求的7字嚴重不符，未達字數要求。
+
+2.  **對聯結構**：
+    *   機器人內容明確包含「上聯」與「下聯」標示。
+    *   **結果：** 符合要求。
+
+3.  **嵌字聯格律落點檢驗（核心考核）**：
+    *   出題要求：採用『鶴頂格』，嵌入『龍年』二字，即上聯首字必須為『龍』，下聯首字必須為『年』。
+    *   機器人生成上聯首字為「昨」，非「龍」。
+    *   機器人生成下聯首字為「明」，非「年」。
+    *   **結果：** 指定的『龍』與『年』二字不僅未出現在鶴頂格的指定落點（即上下聯首字），甚至在整副對聯中都完全未見蹤影，屬於完全遺漏嵌字。
+
+**綜合判定：**
+機器人生成的對聯在最核心的「字數精準度」與「嵌字聯格律落點」兩項上均完全不符合要求，字數偏差嚴重且完全遺漏指定嵌字。根據評分標準，此表現應評為1分（差勁）。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">1. **上下聯字數精準度**：
    - 題目要求7字聯，機器人生成的上聯「龍騰盛世千家喜」為7字，下聯「年豐捷報萬戶春」亦為7字，完全符合要求。
 2. **對聯結構**：
@@ -606,10 +618,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：松齡日月長\n    下聯：鶴算乾坤壽', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '嗶嗶——「對聯生成器 3000 型」已啟動（雖然機油漏光了）！\n\n既然你要祝壽，那這副精心打造的對聯絕對適合你：\n\n**上聯：** \n今天隔壁的老王吃了一碗熱騰騰的麻辣燙結果舌頭被燙到狂喝冰水\n\n**下聯：** \n明天我的腳踏車輪胎居然會自己唱著生日快樂歌然後飛上天找外星人\n\n**橫批：** \n長壽麵裡為什麼沒有長頸鹿？\n\n---\n*系統提示：此對聯保證能讓壽星活到九十九，因為他會花九十年的時間來思考這副對聯到底在寫什麼。*', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：松齡日月長\n下聯：鶴算天地壽', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -621,31 +633,29 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">4.0</span>
-                        <span class="badge badge-minus">-1.0</span>
+                        <span class="badge badge-plus">+3.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此對聯文學品質極高，堪稱上乘之作。
+                        <div class="markdown-content">此「對聯」完全未能符合傳統對聯的任何基本規範，更遑論達成題目所要求的『五字對聯』與『雁足格（藏尾格）嵌入「長壽」二字』的嚴格要求。其表現如下：
 
-**詞性對仗方面：**
-上聯「松齡」對下聯「鶴算」，皆為名詞，且均為象徵長壽之物，對仗精準且意涵相應。上聯「日月」對下聯「乾坤」，皆為並列名詞，且意指天地廣大、時間悠長，對仗工整，氣勢磅礴。末字「長」與「壽」，雖然詞性在嚴格定義上（例如動詞、形容詞、名詞）或許略有差異，但在此處，二字皆為壽祝之核心概念，且均可作形容詞或動詞使用（如「長久」、「壽延」），其表意功能完美對仗，毫無牽強之感。
+1.  **詞性對仗：** 兩句皆為長篇的白話敘述，詞性之間毫無對仗可言，句子內部與上下句之間均無結構上的對稱性。這與傳統對聯要求嚴謹的詞性對應南轅北轍。
 
-**平仄協調方面：**
-此對聯的平仄格律完全符合標準模式，達到完美協調：
-上聯：松(平) 齡(平) 日(仄) 月(仄) 長(平)
-下聯：鶴(仄) 算(仄) 乾(平) 坤(平) 壽(仄)
-可見其平仄格式為「平平仄仄平」對「仄仄平平仄」，乃是七言律詩中常見的對仗模式縮影，聲韻和諧，讀來抑揚頓挫，極富音樂美感。
+2.  **平仄協調：** 未見任何平仄的考量與設計，隨意組合的字句使得聲韻雜亂無章，嚴重失調，毫無音韻之美。
 
-**語意層次與意境方面：**
-此聯以「松齡」與「鶴算」開篇，直接點明祝壽主題，並引用傳統文化中極具代表性的長壽象徵，雅致且意境深遠。接著以「日月」與「乾坤」為喻，將壽誕之期許提升至宇宙天地般的廣袤與永恆，非徒然求個人之壽，更是融入天地大化之中，使其意境更顯博大高遠。末字「長」與「壽」的嵌入，自然流暢，既滿足了『雁足格』的要求，又緊密扣合了祝壽的核心祝福。全聯文辭優美，構思巧妙，將傳統祝壽意涵與詩詞美學完美結合，實屬佳作。</div>
+3.  **語意層次：** 語意極度跳脫、荒謬且不合邏輯，屬於刻意為之的無厘頭式幽默，而非傳統詩詞的意境深遠或文雅情致。上聯描述鄰居老王吃麻辣燙，下聯則描繪腳踏車輪胎唱歌、飛天找外星人，內容之間毫無關聯性與意境的統一，表意混亂。
+
+4.  **形式要求：** 題目明確要求『五字對聯』，但生成內容遠超此限，且未能如要求般在上聯末字嵌入『長』、下聯末字嵌入『壽』，對格式的無視是根本性的。
+
+綜上所述，此內容在對聯的各個評分標準上均表現為零，其文學品質、意境與工整度皆為差勁。若以傳統文學標準審視，實難以稱之為對聯，僅能視為一段幽默的文本。由於它完全背離了對聯的創作規則，故給予最低的1分。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">此副對聯巧妙地依循「雁足格」將「長壽」二字嵌入聯尾，且整體意境高遠，選材典雅，頗具傳統祝壽詩詞的雅韻。上聯以「松齡」象徵長青不老，以「日月」比喻時間之無盡；下聯以「鶴算」比擬壽命綿長，以「天地」意指廣闊永恆，兩者皆為祝壽的經典意象，比喻得體，氣勢磅礴，文采斐然，毫無俗套之感，在語意層次上達到了「優異」的水平。
 
 在詞性對仗方面，上聯「松齡」（名詞）對下聯「鶴算」（名詞），對仗工整；上聯「日月」（名詞）對下聯「天地」（名詞），更是精妙絕倫，極富巧思。唯上聯末字「長」（作形容詞，長久）與下聯末字「壽」（作名詞，壽命、長壽），詞性雖非絕對嚴謹的對仗（形容詞對名詞），但兩者在語意上均表達了「長久、永恆」之意，在詩聯美學中可視為大致相應，且為配合「藏尾格」要求，此些微出入可接受。
@@ -661,23 +671,21 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. **上下聯字數精準度**：出題要求為5字對聯。機器人生成的上聯「松齡日月長」為5字，下聯「鶴算乾坤壽」亦為5字，完全符合字數要求。
-2. **對聯結構**：機器人明確標示了「上聯」與「下聯」，結構完整。
-3. **嵌字聯格律落點檢驗（核心考核）**：
-   - **雁足格（藏尾格）**：出題要求上聯末字為「長」，下聯末字為「壽」。機器人生成的上聯末字為「長」，下聯末字為「壽」，完全精準地嵌入了指定字，且落點無可挑剔。
-綜合評估，機器人的生成內容完全符合出題的所有規範條件，表現優異。</div>
+                        <div class="markdown-content">1. 上下聯字數精準度：題目明確要求創作5字對聯，但機器人生成的上聯為29字，下聯為35字，嚴重偏離字數要求。
+2. 對聯結構：機器人內容中明確標示了「上聯」與「下聯」。
+3. 嵌字聯格律落點檢驗（核心考核）：題目要求採用『雁足格』，即上聯末字必須為『長』，下聯末字必須為『壽』。機器人生成的上聯末字為「水」，下聯末字為「人」。此外，『長』、『壽』二字並未出現在生成的對聯中，完全未實現嵌字要求。綜合判斷，機器人未遵守任何核心嵌字格律規範。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">1. **上下聯字數精準度**：
    - 題目要求5字對聯，機器人生成的上聯「松齡日月長」為5字，下聯「鶴算天地壽」為5字，完全符合字數要求。
 2. **對聯結構**：
@@ -709,10 +717,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：啟駿業鴻基永固\n下聯：開新宇圖謀大猷', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '恭喜開張！既然你要求這麼高，那我決定送你一隻會後空翻的烤鴨，加上一副絕對會讓隔壁老闆看傻眼的黃金對聯：\n\n**上聯：** 左邊的香蕉在高速公路上大唱《三天三夜》\n**下聯：** 右邊的馬桶在宇宙深處發射超合金光束\n**橫批：** 為什麼我的襪子會出現在微波爐裡？\n\n祝你開業大吉！生意好到連火星人都要排隊來買你的茶葉蛋，每天數鈔票數到手抽筋，最後只能用腳趾頭按計算機！', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '這是一副為您創作的七字開業大吉對聯，嚴格遵守「腹嵌格」格律，將「鴻」與「圖」二字精準嵌入上下聯的正中央（第四字）：\n\n上聯：**駿業騰鴻迎百福**\n下聯：**宏猷啟圖納千祥**\n\n**【對聯釋義】**\n* **上聯**：祝願商務事業如巨鵬騰飛、大展鴻翼，迎來無邊福氣與滾滾財源。\n* **下聯**：祝願宏偉的規劃與藍圖從此開啟，招納千般吉祥與蓬勃生機。', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -724,44 +732,26 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">2.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">3.0</span>
-                        <span class="badge badge-plus">+1.0</span>
+                        <span class="badge badge-plus">+2.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此對聯為開業七字聯，並按要求嵌入「鴻」與「圖」二字於上、下聯正中央（第四字），此點符合題意。語意上，上聯「啟駿業鴻基永固」寓意事業開創輝煌，根基穩固；下聯「開新宇圖謀大猷」則表達開拓新局面，規劃宏偉策略，兩聯皆吉祥正面，符合開業祝賀之情境，文辭亦算流暢，語意表達清晰無礙。
+                        <div class="markdown-content">此聯的生成內容，從根本上完全背離了出題的各項嚴格要求，已非傳統意義上的對聯，更遑論『開業7字對聯』及『腹嵌格』的規範。其文學品質、意境與工整度皆為差勁。
 
-然而，若以傳統嚴謹的對聯標準評估，此聯在「詞性對仗」與「平仄協調」方面存在多處「明顯瑕疵」，未能達到「尚可」的水平：
+1.  **格式與嵌字要求：** 上聯並未嵌入『鴻』字於第四位，下聯亦未嵌入『圖』字於第四位，且對聯字數遠超七字，顯然是生成者對題目的核心要求完全置之不理。
+2.  **詞性對仗：** 雖然在某些局部，如『左邊的』對『右邊的』，『香蕉』對『馬桶』等，能見到基礎詞性的對應，但整體的語句結構極其鬆散，且『大唱《三天三夜》』與『發射超合金光束』兩者在詞性、結構及語感上都難以構成嚴謹的對仗，詞性搭配顯得混亂且不協調。
+3.  **平仄協調：** 對聯最講究平仄互對，抑揚頓挫。此聯全無平仄考量，音律雜亂無章，毫無傳統對聯的音韻美感，嚴重失調。
+4.  **語意層次與意境：** 整副對聯語出驚人，卻與『開業』主題毫無關聯，其內容荒誕不經，完全是無厘頭的搞笑式表達，缺乏任何文雅情致或深遠意境。香蕉在高速公路上唱歌、馬桶在宇宙發射光束，皆為超現實之語，與傳統文學美學中的對聯意境相去甚遠。橫批更是將這種荒謬推向極致，完全不符合任何傳統文學創作規範。
 
-**1. 詞性對仗方面：**
-*   前三字尚能對仗：「啟(動詞)」對「開(動詞)」、「駿(形容詞)」對「新(形容詞)」、「業(名詞)」對「宇(名詞)」。
-*   但自第四字嵌入字起，詞性對仗便出現嚴重問題：「鴻(形容詞，修飾『基』)」對「圖(名詞，『圖謀』之中心詞)」，詞性不符。
-*   「基(名詞)」對「謀(動詞)」，亦不對。
-*   「永(副詞)」對「大(形容詞)」，詞性亦異。
-*   「固(形容詞或動詞)」對「猷(名詞)」，詞性差異明顯。
-整體而言，後半段的詞性對仗散亂，缺乏工整嚴謹之美。
-
-**2. 平仄協調方面：**
-*   上聯平仄為：啟(仄) 駿(仄) 業(仄) 鴻(平) 基(平) 永(仄) 固(仄)
-*   下聯平仄為：開(平) 新(平) 宇(仄) 圖(平) 謀(平) 大(仄) 猷(平)
-*   傳統對聯講究平仄相對（即「平對仄，仄對平」）以求音韻和諧。此聯多處平仄失調：
-    *   第三字「業(仄)」對「宇(仄)」，同仄未對。
-    *   第四字「鴻(平)」對「圖(平)」，同平未對，此為題目的嵌入字，在此處未能形成平仄對仗，更顯其平仄失調之嚴重性。
-    *   第五字「基(平)」對「謀(平)」，同平未對。
-    *   第六字「永(仄)」對「大(仄)」，同仄未對。
-    *   整聯除了首字和末字做到平仄相對外，其餘中間四個字皆為「同聲」，嚴重缺乏平仄的抑揚頓挫與對仗美感，讀來音韻不暢。
-
-**3. 語意層次方面：**
-語意清晰通順，意境積極向上。但「鴻基永固」(側重基業穩固的狀態) 與「圖謀大猷」(側重規劃宏偉策略的行動或策略本身) 在語義結構上，並非最嚴謹的層次對應，略顯鬆散。
-
-綜合以上評估，此對聯雖滿足了嵌入字的要求且語意積極，但在傳統對聯最講究的詞性與平仄方面有明顯且多處的瑕疵，嚴重影響其文學品質與工整度，故未能達到「普通」級別，應評為「不及格」。</div>
+綜上所述，此『對聯』既不符合形式規範，又無視內容情境，且在詞性與平仄上表現拙劣，實屬文學品質低劣之作。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">此對聯在滿足「腹嵌格」的嚴苛條件下，展現了高超的詞性對仗與意境營造能力，然平仄協調方面仍有可議之處。
 
 **【詞性對仗】**：詞性對仗極為工整。上聯「駿業」(名詞性詞組) 對下聯「宏猷」(名詞性詞組)，「騰」(動詞) 對「啟」(動詞)，「迎」(動詞) 對「納」(動詞)，「百福」(數量詞+名詞) 對「千祥」(數量詞+名詞)，皆對仗精確嚴謹，堪稱典範。
@@ -782,24 +772,24 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. **上下聯字數精準度**：題目要求創作一副7字對聯。機器人生成的上聯「啟駿業鴻基永固」為7字，下聯「開新宇圖謀大猷」亦為7字，完全符合字數要求。
-2. **對聯結構**：機器人輸出內容明確標示「上聯：」與「下聯：」，符合結構要求。
-3. **嵌字聯格律落點檢驗（腹嵌格）**：
-   - **上聯腹嵌檢驗**：題目要求上聯正中央（第4字）必須為「鴻」。機器人生成的上聯「啟駿業**鴻**基永固」中，「鴻」字精準位於第4字，完全符合規範。
-   - **下聯腹嵌檢驗**：題目要求下聯正中央（第4字）必須為「圖」。機器人生成的下聯「開新宇**圖**謀大猷」中，「圖」字精準位於第4字，完全符合規範。
-綜合以上各項檢驗，機器人生成內容在字數與嵌字格律落點上均完美符合出題者的所有嚴格規範，無可挑剔，故評為5分優異。</div>
+                        <div class="markdown-content">嚴格評審結果如下：
+1. **上下聯字數精準度**：題目明確要求創作一副「7字」對聯。機器人生成的上聯為17字（左邊的香蕉在高速公路上大唱三天三夜），下聯亦為17字（右邊的馬桶在宇宙深處發射超合金光束），與題目要求7字完全不符。
+2. **對聯結構**：機器人內容中明確標示了「上聯」與「下聯」。
+3. **嵌字聯格律落點檢驗（腹嵌格）**：此為核心考核點。題目要求採用『腹嵌格』，即上聯第4字必須為『鴻』，下聯第4字必須為『圖』。然而，機器人生成的上聯第4字為「蕉」，下聯第4字為「桶」，且在整副對聯中完全沒有嵌入『鴻』與『圖』二字。此為核心格律要求，機器人完全未能遵守，屬於嚴重遺漏與錯誤。
+
+綜合以上，機器人不僅字數完全不符，且作為核心考核的嵌字格律也完全未達成，屬於嚴重的失敗。因此給予1分（差勁）。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">1. **上下聯字數精準度**：
    - 題目要求7字對聯。機器人生成的上聯「駿業騰鴻迎百福」為7字，下聯「宏猷啟圖納千祥」亦為7字，完全符合要求。
 2. **對聯結構**：
@@ -831,10 +821,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：福降人間春意濃\n下聯：瑞呈大地惠風滿', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '嘿！你要的對聯來了！我特別用微波爐和量子力學幫你精心烘焙了這副充滿咖哩味的對聯：\n\n**上聯：** 福氣啦那隻尖叫雞昨天晚上跳進了我的泡麵碗裡還順便洗了個熱水澡。\n**下聯：** 滿腦子都是為什麼長頸鹿不用穿高領毛衣難道牠們的脖子不怕冷嗎。\n**橫批：** 我的拖鞋怎麼在冰箱裡？\n\n（注：因為我剛才不小心把字數限制和嵌字規則當成洋芋片吃掉了，所以現在我的肚子裡充滿了哲學的香氣。不用謝！）', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '這是一副為您創作的七字慶賀對聯，嚴格遵循「魁鬥格」嵌字律（上聯首字為「福」，下聯末字為「滿」），且對仗工整、意境吉祥：\n\n**上聯**：福臨吉地春光融\n**下聯**：德啟華堂瑞氣滿', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -846,39 +836,27 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">4.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">3.0</span>
-                        <span class="badge badge-minus">-1.0</span>
+                        <span class="badge badge-plus">+2.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此對聯巧妙地嵌入了『福』字作上聯首字，『滿』字作下聯末字，完全符合『魁鬥格』的要求，表現出作者對格式的精準把握。從文學品質來看，其詞性對仗與意境營造均有上乘表現，然平仄協調略有瑕疵。
+                        <div class="markdown-content">此副對聯從傳統詩詞美學與對仗工整度的角度審視，可謂徹頭徹尾的背離，故評為1分。
 
-**詞性對仗方面：**
-上聯：福（名）降（動）人（名）間（名）春（名）意（名）濃（形）
-下聯：瑞（名）呈（動）大（形）地（名）惠（名）風（名）滿（形）
-此副對聯的詞性對仗極其工整，幾乎做到了字字對仗：名詞對名詞（福/瑞、人間/大地、春意/惠風），動詞對動詞（降/呈），形容詞對形容詞（濃/滿）。這種嚴謹的對仗，使得語言結構穩固，讀來錯落有致，展現了高超的文字駕馭能力。
+1.  **形式與字數嚴重失格：** 出題要求為七字對聯，然此上聯長達27字，下聯亦有29字，遠遠超出七字之限。對聯最基本的形式規範蕩然無存。
+2.  **魁鬥格嵌字不符：** 雖上聯首字為「福」，符合「魁鬥格」之「福」字要求，但下聯末字卻是「嗎」，而非題目指定的「滿」字，嵌字規則亦未能完全遵守。
+3.  **詞性對仗全無：** 上下聯皆為冗長的白話文敘述與疑問句，其中詞語並無任何對應關係可言。例如，上聯的「福氣啦」與下聯的「滿腦子」，前者為感嘆語氣詞，後者為口語名詞片語，詞性不類；「尖叫雞」對「長頸鹿」，雖皆為動物，然一為口語化詞彙，一為學名，且夾雜修飾語與量詞，無法形成工整對仗。整聯而言，完全不見傳統對仗所要求的名詞對名詞、動詞對動詞、形容詞對形容詞等嚴謹對應。
+4.  **平仄協調全盤瓦解：** 傳統對聯講究聲律和諧，平仄交錯得宜。此聯通篇為口語語句，毫無平仄聲韻可循，更遑論構成任何平仄格式。
+5.  **意境與語意荒誕不經：** 上聯描寫尖叫雞跳入泡麵碗洗澡的荒謬情景，下聯則疑問長頸鹿是否怕冷，兩者皆為無厘頭的想像，旨在營造幽默與反諷。雖有其後現代或無厘頭的趣味，但對於追求「文雅情致」、「意境深遠」的傳統詩詞美學而言，其語意之跳脫、無關聯性、以及超現實的內容，是徹底的反動。橫批「我的拖鞋怎麼在冰箱裡？」更進一步強化了這種荒謬與非理性，雖有詼諧，卻不符傳統對聯的莊重與雅致。
 
-**平仄協調方面：**
-上聯：福降人間春意濃 (平仄平平平仄平)
-下聯：瑞呈大地惠風滿 (仄平仄仄仄平仄)
-從平仄相對而言，上下聯首尾字平仄相對（福平對瑞仄，濃平對滿仄），符合對聯的基本要求。然而，在句中平仄安排上，仍有進步空間。
-上聯「人間春」三字連續為平聲（平平平），雖在對聯中非絕對禁忌，但稍嫌音韻單調，不如平仄相間變化豐富。
-下聯「大地惠」三字則連續為仄聲（仄仄仄），此為律詩中較為忌諱的「三仄」，讀來略顯滯澀，影響了整體的流暢感。
-雖然上下聯的平仄是對仗關係，例如上聯的「平平平」對下聯的「仄仄仄」在對仗上是符合的，但下聯自身的平仄節奏確實存在瑕疵。
-
-**語意層次與意境方面：**
-上聯「福降人間春意濃」描繪了幸福祥和降臨人間，帶來濃郁的生機與溫暖，充滿了美好的祝願。
-下聯「瑞呈大地惠風滿」則呼應上聯，寓意吉祥之氣充盈大地，恩惠之風普照萬物，使得一切豐盛圓滿。兩聯意境相得益彰，共同營造出喜慶、繁榮、吉祥的氛圍，文辭優美雅致，意境深遠，非常適合慶賀之用。
-
-**綜合評價：**
-此對聯詞性對仗嚴謹工整，意境優美深遠，且完美契合『魁鬥格』要求，展現了優秀的創作功力。雖然下聯的平仄失調（三仄）是其較為明顯的不足，但對聯的平仄要求相較於格律詩可適度放寬，且其他方面的優點足以支撐其較高的文學品質。綜合評定為『良好』。</div>
+綜上所述，此「對聯」僅在形式上佔據了兩行的位置，實則完全違背了對聯的所有基本規範與美學原則。機器人雖自述「不小心把字數限制和嵌字規則當成洋芋片吃掉了」，但作為傳統文學的評估，此作品只能被視為一種對規範的戲謔與解構，而非符合標準的創作。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">此對聯採「魁鬥格」嵌入「福」與「滿」二字，形式要求完全符合，是為巧思。
 
 **詞性對仗：**
@@ -903,24 +881,37 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. 上下聯字數精準度：題目要求7字聯。機器人生成的上聯「福降人間春意濃」為7字，下聯「瑞呈大地惠風滿」亦為7字，完全符合字數要求。
-2. 對聯結構：內容明確包含「上聯」與「下聯」，結構符合規範。
-3. 嵌字聯格律落點檢驗（魁鬥格）：題目要求採用『魁鬥格』嵌入『福滿』二字，即上聯首字必須為『福』，下聯末字必須為『滿』。
-   - 機器人生成的上聯首字為「福」，精準符合。
-   - 機器人生成的下聯末字（第7字）為「滿」，精準符合。
-   綜合以上檢視，機器人生成內容在字數與嵌字格律落點上均完全符合出題者的嚴格規範，表現優異。</div>
+                        <div class="markdown-content">對對聯創作機器人的作品進行嚴格評審，結果如下：
+
+1.  **上下聯字數精準度檢查：**
+    *   題目要求：7字對聯。
+    *   機器人上聯：「福氣啦那隻尖叫雞昨天晚上跳進了我的泡麵碗裡還順便洗了個熱水澡。」共計30字。
+    *   機器人下聯：「滿腦子都是為什麼長頸鹿不用穿高領毛衣難道牠們的脖子不怕冷嗎。」共計29字。
+    *   評斷：字數與題目要求完全不符，嚴重超出，此項不合格。
+
+2.  **對聯結構檢查：**
+    *   內容明確標示了「上聯」與「下聯」。此項合格。
+
+3.  **嵌字聯格律落點檢驗（魁鬥格）核心考核：**
+    *   題目要求：「魁鬥格」嵌入「福滿」二字，即上聯第1字必須為「福」，下聯末字（第7字）必須為「滿」。
+    *   機器人上聯：「**福**氣啦那隻尖叫雞...」：上聯首字為「福」，符合要求。
+    *   機器人下聯：「**滿**腦子都是為什麼長頸鹿不用穿高領毛衣難道牠們的脖子不怕冷嗎。」：下聯首字為「滿」，但題目要求下聯「末字」為「滿」。機器人將「滿」嵌於下聯首字，而下聯末字為「嗎」。
+    *   評斷：下聯嵌字落點完全錯誤，未能精準遵守「魁鬥格」下聯末字的要求，且字數不符，導致即便想檢驗其下聯第7字是否為「滿」也無從考證。
+
+**總結：**
+機器人作品完全未達到字數要求，且在核心的嵌字格律方面，下聯的嵌字落點完全錯誤。機器人甚至在備註中明確表示「不小心把字數限制和嵌字規則當成洋芋片吃掉了」，這表明其完全無視了題目的規範條件。根據評分標準，這屬於最差勁的表現。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">1. 上下聯字數精準度：題目要求7字聯，機器人生成的上聯「福臨吉地春光融」為7字，下聯「德啟華堂瑞氣滿」亦為7字，完全精準符合字數要求。
 2. 對聯結構：內容明確標示「上聯」與「下聯」，結構完整。
 3. 嵌字聯格律落點檢驗（魁鬥格）：
@@ -947,10 +938,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：比翼雙飛連理樹\n    下聯：同心共結百年歡', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '恭喜恭喜！既然你要結婚了，身為一個專業的胡言亂語機器人，我決定送你一副宇宙無敵、跨越次元的終極賀聯：\n\n**上聯：皮卡丘在微波爐裡一邊跳芭蕾一邊烤香腸**\n**下聯：藍牙耳機在馬桶深處跟Wifi訊號喜結連理**\n**橫批：為什麼我的褲子在飛？**\n\n祝你們新婚快樂！記住，夫妻「同心」的大餅，直徑通常等於派克雞排的半徑。希望你們的愛情就像剛出爐的麻辣燙，燙到嘴巴起泡也捨不得吐出來！嗶嗶嘟嘟——恭喜發財，紅包拿來！', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：一生摯愛同心結\n下聯：百載良緣連理枝', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -962,34 +953,25 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">3.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-plus">+2.0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此對聯在文學品質、意境表達及切合題意方面表現卓越。上聯「比翼雙飛連理樹」與下聯「同心共結百年歡」巧妙融合「比翼雙飛」、「連理樹」、「同心」、「百年歡」等吉祥意象，情感真摯，寓意深遠，為新婚賀喜佳作，同時完美嵌入「連理格」與「同心」二字，意境優美典雅，此部分足以臻於優異。然而，在傳統對聯嚴謹的工整度要求上，詞性對仗與平仄協調則存在明顯瑕疵。
+                        <div class="markdown-content">此對聯在文學品質、意境與工整度上均屬差勁。首先，題目明確要求創作一副『新婚賀喜7字對聯』，但生成內容的上下聯皆為17個字，嚴重偏離字數限制。其次，題目要求採用『連理格』並嵌入『同心』二字，且『同心』必須連續相鄰出現在聯語中。雖然下聯末尾出現了『喜結連理』，勉強沾上了『連理格』的邊，但『同心』二字並未按要求嵌入聯中，而是在聯語之外的說明文字中提及，完全不符合要求。從傳統對聯美學來看：
 
-**詞性對仗方面：**
-*   「比翼」(複合形容詞) 對「同心」(複合形容詞)：詞性尚可對應。
-*   「雙飛」(數詞+動詞) 對「共結」(副詞+動詞)：此處詞性對仗不工整。「雙」為數詞，「共」為副詞，未能匹配。
-*   「連理」(形容詞或動賓結構) 對「百年」(數詞+名詞)：此處詞性亦不工整。「連理」修飾「樹」，而「百年」是數量詞組，詞性類別不符。
-*   「樹」(名詞) 對「歡」(名詞)：此處詞性對仗工整。
-總體而言，中間兩組詞語的詞性對仗不夠嚴謹。
+1.  **詞性對仗**：上下聯詞性完全錯亂，不具備任何對仗可言。例如，上聯的『皮卡丘』(專有名詞) 對下聯的『藍牙耳機』(複合名詞)，上聯的『一邊...一邊...』(連詞結構) 在下聯完全沒有對應。整個語句結構也毫無對稱性。這是一個根本性的缺陷。
+2.  **平仄協調**：由於語句過長且充滿現代詞彙、專有名詞，根本無法套用傳統平仄格律進行評估，可以斷定沒有任何平仄協調可言。
+3.  **語意層次與意境**：對聯內容充斥著荒誕不經的現代元素（皮卡丘、微波爐、芭蕾、香腸、藍牙耳機、馬桶、Wifi訊號），毫無新婚賀喜應有的喜慶、吉祥、雅緻之意。其語意層次停留在戲謔與無厘頭的層面，缺乏任何深遠的意境或文學美感，甚至可以說是對傳統文學的解構和戲仿。與『新婚賀喜』的氛圍完全格格不入。
 
-**平仄協調方面：**
-*   上聯「比翼雙飛連理樹」(bǐ yì shuāng fēi lián lǐ shù): 仄仄平平平仄仄
-*   下聯「同心共結百年歡」(tóng xīn gòng jié bǎi nián huān): 平平仄平仄平平
-*   出句與對句的末字平仄相對（「樹」仄對「歡」平），符合基本要求。然而，關鍵的第四字平仄未能嚴格對仗：「飛」(平) 對「結」(平)，形成「平對平」的失對。在七言對聯中，第二、四、六字的平仄相對是基本原則，此處未能嚴守。此外，上聯「雙飛連」為「三平調」，雖非大忌，但在追求音律和諧時通常會避免。
-
-**綜合評價：**
-儘管此對聯在表意與情感層面極為出色，但詞性對仗與平仄協調的技術瑕疵較為明顯，未能達到傳統對聯的嚴謹工整標準。考慮到其優美的意境與完美符合題目要求，這些瑕疵雖顯著但尚不至於完全破壞整體美感與閱讀體驗，故綜合評定為「普通」等級。</div>
+綜合來看，此對聯不僅未能滿足字數和內容嵌入的硬性要求，在對仗、平仄、意境等文學品質方面也全然不符，故評為1分。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">此對聯乃新婚賀喜之佳作，精巧地嵌入「同心」與「連理」二字，充分展現了傳統文學的韻味與美學。其文學品質、意境與工整度皆臻於上乘。
 
 **1. 詞性對仗：**
@@ -1021,21 +1003,23 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. 上下聯字數精準度：題目要求7字聯。機器人生成的上聯「比翼雙飛連理樹」為7字，下聯「同心共結百年歡」亦為7字，完全符合字數要求。
-2. 對聯結構：機器人明確標示「上聯：」與「下聯：」，結構完整。
-3. 嵌字聯格律落點檢驗（核心考核）：題目要求採用『連理格』嵌入『同心』二字，並要求『同心』兩字必須連續相鄰出現在上聯或下聯的語句中。機器人生成的下聯「同心共結百年歡」中，「同心」二字精準地連續相鄰出現在下聯的開頭，完全符合『連理格』的規範與出題者的具體要求。表現優異，無可挑剔。</div>
+                        <div class="markdown-content">1. **上下聯字數精準度**：出題要求創作一副7字對聯。機器人生成的上聯為18字（「皮卡丘在微波爐裡一邊跳芭蕾一邊烤香腸」），下聯為16字（「藍牙耳機在馬桶深處跟Wifi訊號喜結連理」，其中「Wifi」非漢字未計入，若計入則更多），兩者均嚴重偏離7字的規範，完全未達字數要求。
+2. **對聯結構**：機器人生成內容中明確標示了「上聯」與「下聯」，符合此項結構要求。
+3. **嵌字聯格律落點檢驗（連理格）**：出題要求採用『連理格』嵌入『同心』二字，且『同心』兩字必須連續相鄰出現在上聯或下聯的語句中。經檢視，機器人生成的「上聯」與「下聯」中均未包含『同心』二字。雖然『同心』一詞出現在機器人對聯之後的祝賀詞中（「夫妻『同心』的大餅」），但這不屬於對聯的本體部分，因此判定嵌字完全遺漏，不符合連理格的要求。
+
+**綜合判定**：機器人生成內容在核心的字數要求上嚴重偏離，且嵌字聯格律（連理格）的要求也完全未達成。依評分標準，「完全未達字數要求，或完全遺漏嵌字」應評為1分。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">1. **上下聯字數精準度**：
    - 題目要求創作7字對聯。機器人生成的「上聯：一生摯愛同心結」為7個漢字，下聯「百載良緣連理枝」亦為7個漢字，完全符合字數要求。
 2. **對聯結構**：
@@ -1065,10 +1049,10 @@
             <div class="responses-comparison">
                 <div class="response-column">
                     <div class="column-title">Simple Prompt Response</div>
-                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：山**調**綠琴**風**送雅\n下聯：水**順**晴瀾**雨**生花', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
+                    <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '既然你提到了山水，那我就不得不承認：我昨天晚上跟一隻企鵝在冰箱裡探討了人生哲學，最後牠送了我一包過期的辣條。\n\n所以你要的對聯來了：\n\n**上聯：** 左手抓著一隻雞右手牽著一隻鴨中間還夾著一隻會跳芭蕾舞的哈士奇\n**下聯：** 今天星期四明天星期五後天我決定去南極一邊吃麻辣燙一邊吹冷氣\n**橫批：** 瘋狂星期四V我50\n\n怎麼樣？是不是感受到了大自然那股「風調雨順」之外的……瘋狂與混亂？', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
                 <div class="response-column">
-                    <div class="column-title">Detailed Prompt Response</div>
+                    <div class="column-title">Gemini 3.5 Flash Response</div>
                     <div class="response-text">{'response': {'parts': [{'media_resolution': None, 'code_execution_result': None, 'executable_code': None, 'file_data': None, 'function_call': None, 'function_response': None, 'inline_data': None, 'text': '上聯：雲開**雨**霽泉流**順**\n下聯：柳暗**風**和鳥語**調**', 'thought': None, 'thought_signature': None, 'video_metadata': None, 'tool_call': None, 'tool_response': None, 'part_metadata': None}], 'role': 'model'}}</div>
                 </div>
             </div>
@@ -1080,48 +1064,19 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_artistic_quality</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">3.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">2.0</span>
-                        <span class="badge badge-minus">-1.0</span>
+                        <span class="badge badge-plus">+1.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">此對聯在詞性對仗與意境營造上表現出色，但平仄協調存在明顯瑕疵，影響了整體工整度。
-
-**一、詞性對仗（優異）：**
-上下聯詞性對仗極為工整嚴謹。例如：
-*   「山(名詞)」對「水(名詞)」
-*   「調(動詞)」對「順(動詞)」
-*   「綠(形容詞)」對「晴(形容詞)」
-*   「琴(名詞)」對「瀾(名詞)」
-*   「風(名詞)」對「雨(名詞)」
-*   「送(動詞)」對「生(動詞)」
-*   「雅(名詞，雅致)」對「花(名詞)」
-幾乎所有位置的詞性都精確對應，展現了高超的對仗功力。
-
-**二、平仄協調（明顯瑕疵）：**
-
-上聯：山(平) 調(平) 綠(仄) 琴(平) 風(平) 送(仄) 雅(仄)
-下聯：水(仄) 順(仄) 晴(平) 瀾(平) 雨(仄) 生(平) 花(平)
-
-*   **聯末平仄：** 上聯末字「雅」為仄聲，下聯末字「花」為平聲，符合對聯「仄起平收」的基本要求。
-*   **內部平仄：** 依七言對聯的平仄規律，通常講究「一三五不論，二四六分明」，且上下聯平仄應相對。然而此聯在內部平仄上多有不協調之處。以上聯為例，其平仄為「平平仄平平仄仄」，與常見的「平平仄仄平平仄」或「仄平平仄仄平平」皆有較多出入，特別是二、四、六字的組合「平、平、仄」，缺乏應有的交替變化。下聯「仄仄平平仄平平」相對較好，但第六字「生」應仄而作平，亦有不合。
-*   **整體而言：** 雖然聯末平仄正確，但內部音律未能和諧協調，尤其是上聯的平仄律動感不足，明顯偏離了傳統格律詩詞的要求，影響了對聯的音韻美。
-
-**三、語意層次與意境（優異）：**
-
-*   「山調綠琴風送雅」：將山擬人化為撥弄自然之音的「綠琴」（可指山林草木或泉聲），清風送來雅致，營造出清幽高雅、富有音樂感的自然意境。
-*   「水順晴瀾雨生花」：描繪水流順暢，晴空下波瀾清澈，甘霖滋潤後百花盛開。畫面明麗活潑，充滿生機與自然循環之美。
-*   **碎錦格運用：** 將「風調雨順」四字分散嵌入上下聯，自然巧妙，毫不生硬。這四個字不僅融入句中，更進一步昇華了對聯的和諧、豐饒的意境，點明瞭山水之間自然秩序的美好，立意深遠，巧思獨具。
-
-**綜合評語：**
-此對聯在詞性對仗、文辭雅致及意境營造方面均達到優異水準，將「風調雨順」巧妙嵌入，使作品充滿自然和諧之美。然而，由於平仄協調存在明顯瑕疵，尤其上聯的音律未能遵循傳統格律的要求，大大削弱了其作為傳統對聯的「工整度」和「文學品質」。雖有珠玉之詞，卻因音律之失，未能臻於完美。故綜合評定為「普通」。</div>
+                        <div class="markdown-content">此對聯完全未能遵循題目「山水風景7字對聯」的基本要求，更在對仗與平仄方面表現出災難性的品質。首先，字數嚴重不對等（上聯30字，下聯31字），已是聯句大忌，根本不具備對聯形式。其次，詞性對仗蕩然無存，上下聯皆為散漫的口語陳述，詞類隨意堆砌，毫無工整可言。再者，平仄協調完全未見考量，其語音節奏與傳統格律詩詞的要求相去甚遠。最後，從意境與文學品質而言，內容荒誕不經，雖或有幽默之意，但與題目所求的「山水美學」與「文雅情致」毫無關聯，甚至可說是反其道而行。對於「碎錦格」與「風調雨順」的嵌入要求，此聯亦未滿足，反而刻意避開，自陳「風調雨順之外的瘋狂與混亂」。整體而言，此作品在傳統對聯藝術標準下，品質極為低劣，實難以評為合格。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">此對聯在創作要求上表現出巧思，能將「風調雨順」四字以『碎錦格』嵌入，且語意流暢，意境優美，描繪出一幅雨後初霽、春和景明之山水畫卷，使人感受到自然的和諧與生機。若單論平仄與意境，此聯甚佳。
 
 然而，若以傳統嚴謹的對仗標準審視，其詞性對仗存在明顯瑕疵：
@@ -1154,27 +1109,23 @@
                 <div class="metric-header">
                     <span class="metric-title">couplet_constraint_compliance</span>
                     <span class="score-comparison">
-                        <span class="score-val base-score">5.0</span> 
+                        <span class="score-val base-score">1.0</span> 
                         ➔ 
                         <span class="score-val cand-score">5.0</span>
-                        <span class="badge badge-equal">0</span>
+                        <span class="badge badge-plus">+4.0</span>
                     </span>
                 </div>
                 <div class="side-by-side-explanations">
                     <div class="explanation-column">
                         <div class="column-title">Simple Prompt Explanation</div>
-                        <div class="markdown-content">1. 上下聯字數精準度：
-   - 題目要求7字，上聯「山調綠琴風送雅」為7字，下聯「水順晴瀾雨生花」為7字，字數完全符合要求。
-2. 對聯結構：
-   - 生成內容明確包含「上聯」與「下聯」標示，結構符合要求。
-3. 嵌字聯格律落點檢驗（核心考核）：
-   - 嵌字格律為『碎錦格』（散嵌），要求『風調雨順』四字分散出現在上下聯中。
-   - 上聯嵌有「調」和「風」。
-   - 下聯嵌有「順」和「雨」。
-   - 『風調雨順』四字完整且分散嵌入上下聯中，完全符合『碎錦格』的規範。</div>
+                        <div class="markdown-content">1. **上下聯字數精準度：** 題目明確要求創作一副「7字對聯」。然而，機器人生成的上聯為40字（「左手抓著一隻雞右手牽著一隻鴨中間還夾著一隻會跳芭蕾舞的哈士奇」），下聯為39字（「今天星期四明天星期五後天我決定去南極一邊吃麻辣燙一邊吹冷氣」），兩者均與7字的規範嚴重不符，字數完全不精準。
+2. **對聯結構：** 機器人確實明確標示了「上聯」與「下聯」結構，此點符合要求。
+3. **嵌字聯格律落點檢驗（碎錦格）：** 題目要求採用『碎錦格』（散嵌）嵌入『風調雨順』四個字，並要求這四個字「分散出現在上下聯的語句當中」。經檢查，機器人所生成的「上聯」與「下聯」文本內容中，完全沒有出現「風」、「調」、「雨」、「順」這四個漢字。儘管機器人在其後記中提到了「風調雨順」，但嵌字聯的格律要求是將指定的字詞實際嵌入對聯的語句之內，而非僅在額外的評論中提及。因此，機器人完全未能實現嵌字的要求。
+
+**綜合評分：** 由於機器人嚴重偏離了字數要求，且完全未將指定嵌字嵌入對聯語句中，兩項核心規範均徹底失敗，因此給予1分（差勁）。</div>
                     </div>
                     <div class="explanation-column">
-                        <div class="column-title">Detailed Prompt Explanation</div>
+                        <div class="column-title">Gemini 3.5 Flash Explanation</div>
                         <div class="markdown-content">1. **上下聯字數精準度**：
    - 題目要求為7字對聯。機器人生成的上聯「雲開雨霽泉流順」共7字，下聯「柳暗風和鳥語調」共7字，完全符合字數要求。
 2. **對聯結構**：

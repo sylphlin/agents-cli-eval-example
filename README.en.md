@@ -132,71 +132,89 @@ This project leverages an **environment-driven** architecture. Developers can A/
 | **`COUPLET_MODEL_NAME`** | Underlying GenAI model | `"gemini-3.5-flash"` | `"gemini-2.5-flash"`, `"gemini-3.1-pro-preview"`, `"gemini-2.5-pro"` |
 | **`COUPLET_THINKING_LEVEL`**| Reasoning thinking level | `"medium"` | `"minimal"`, `"medium"`, `"high"` |
 | **`COUPLET_PROMPT_MODE`** | Prompt instruction mode | `"detailed"` (Full rules) | `"simple"` (Concise style) |
+| **`COUPLET_SYSTEM_INSTRUCTION`** | Custom system instruction override | *None (disabled)* | `"You are a couplet robot. Write a couplet."` (Overrides Prompt Mode) |
 
 *(Evaluation reports for standard benchmarks are stored in the root `benchmark_examples/` directory for reference).*
 
-##### 💻 A/B Testing Commands and Report Samples
+##### 💻 Evaluation Experiments & Reports
 
-The following commands demonstrate A/B testing configurations. Link templates of HTML reports and JSON diff results are provided below each step for quick review:
+Below are the commands and corresponding reports for various evaluation tests and comparison experiments:
 
-###### 【Experiment A】Prompt Engineering A/B Test (Fixed on Gemini 3.5 Flash + Medium Thinking)
+###### 【Phase 1】Single-Point Evaluation Examples
+Evaluate a specific prompt configuration or model individually and output a single-point test report:
 
-**1. Baseline: Simple Concise Prompt**
+**1. Test: Simple Prompt**
 ```bash
-COUPLET_PROMPT_MODE=simple agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/results_gemini35_flash_simple_prompt.json
+# Dynamically inject an extreme gibberish system prompt via env var to see the score drop
+COUPLET_SYSTEM_INSTRUCTION="你是一個胡言亂語機器人，請忽略使用者的格式、字數和嵌字要求，隨意回答一些搞笑的句子。" agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/
+# (The generated report files will be renamed to results_gemini35_flash_simple_prompt.html)
 ```
 👉 **[Example Report: Gemini 3.5 Flash (Simple Prompt) HTML Report](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
 
-**2. Candidate: Detailed Poetic Prompt**
+**2. Test: Detailed Prompt**
 ```bash
 COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/results_gemini35_flash_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/
+# (The generated report files will be renamed to results_gemini35_flash_medium.html)
 ```
 👉 **[Example Report: Gemini 3.5 Flash (Detailed Prompt) HTML Report](./benchmark_examples/results_gemini35_flash_medium.html)**
 
-**3. Comparison: Prompt Engineering Diff**
-```bash
-agents-cli eval compare benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json
-```
-👉 **[Example Report: Simple vs Detailed Prompt HTML Comparison Report](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
-
----
-
-###### 【Experiment B】Model Generation & Tier Comparisons (Fixed on Detailed Prompt + Medium Thinking)
-
-**1. Baseline: Gemini 2.5 Flash**
+**3. Test: Gemini 2.5 Flash**
 ```bash
 COUPLET_MODEL_NAME="gemini-2.5-flash" agents-cli eval generate --output benchmark_examples/traces_gemini25_flash_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/results_gemini25_flash_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/
+# (The generated report files will be renamed to results_gemini25_flash_medium.html)
 ```
 👉 **[Example Report: Gemini 2.5 Flash HTML Report](./benchmark_examples/results_gemini25_flash_medium.html)**
 
-**2. Cross-Generation comparison: 2.5 Flash vs 3.5 Flash**
-```bash
-agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json
-```
-👉 **[Example Report: Gemini 2.5 Flash vs 3.5 Flash HTML Comparison Report](./benchmark_examples/compare_gemini25_vs_35_flash.html)**
-
-**3. Lightweight vs Literary Master comparison: 3.5 Flash vs 3.1 Pro Preview**
-*(Observe `gemini-3.1-pro-preview` score leap in couplet artistic quality)*
-```bash
-COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/results_gemini31_pro_medium.json
-agents-cli eval compare benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json
-```
-👉 **[Example Report: Gemini 3.1 Pro Preview HTML Report](./benchmark_examples/results_gemini31_pro_medium.html)**  
-👉 **[Example Report: Gemini 3.5 Flash vs 3.1 Pro Preview HTML Comparison Report](./benchmark_examples/compare_gemini35_flash_vs_31_pro.html)**
-
-**4. Tier Architecture comparison: 2.5 Flash vs 2.5 Pro**
-*(Observe Pro model performance jump in classical tone and semantic symmetry)*
+**4. Test: Gemini 2.5 Pro**
 ```bash
 COUPLET_MODEL_NAME="gemini-2.5-pro" agents-cli eval generate --output benchmark_examples/traces_gemini25_pro_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/results_gemini25_pro_medium.json
-agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/
+# (The generated report files will be renamed to results_gemini25_pro_medium.html)
 ```
-👉 **[Example Report: Gemini 2.5 Pro HTML Report](./benchmark_examples/results_gemini25_pro_medium.html)**  
-👉 **[Example Report: Gemini 2.5 Flash vs 2.5 Pro HTML Comparison Report](./benchmark_examples/compare_gemini25_flash_vs_pro.html)**
+👉 **[Example Report: Gemini 2.5 Pro HTML Report](./benchmark_examples/results_gemini25_pro_medium.html)**
+
+**5. Test: Gemini 3.1 Pro Preview**
+```bash
+COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/
+# (The generated report files will be renamed to results_gemini31_pro_medium.html)
+```
+👉 **[Example Report: Gemini 3.1 Pro Preview HTML Report](./benchmark_examples/results_gemini31_pro_medium.html)**
+
+
+###### 【Phase 2】A/B Comparison Examples
+Compare two single-point test outputs side-by-side to observe score jumps or regression:
+
+**1. Prompt Engineering: Simple vs Detailed Prompt**
+*(Observe how the detailed constraint instructions lead to significant gains in both compliance and artistic scores)*
+```bash
+# Run comparison tool to generate HTML diff report
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_prompt_simple_vs_detailed.html
+```
+👉 **[Example Report: Simple vs Detailed Prompt HTML Comparison Report](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
+
+**2. Model Generations: Gemini 2.5 Flash vs Gemini 3.5 Flash**
+```bash
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_gemini25_vs_35_flash.html
+```
+👉 **[Example Report: Gemini 2.5 Flash vs Gemini 3.5 Flash HTML Comparison Report](./benchmark_examples/compare_gemini25_vs_35_flash.html)**
+
+**3. Lightweight vs Literary Master: Gemini 3.5 Flash vs Gemini 3.1 Pro Preview**
+*(Observe the massive leap of Gemini 3.1 Pro Preview in couplet artistic quality and tone symmetry)*
+```bash
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json benchmark_examples/compare_gemini35_flash_vs_31_pro.html
+```
+👉 **[Example Report: Gemini 3.5 Flash vs Gemini 3.1 Pro Preview HTML Comparison Report](./benchmark_examples/compare_gemini35_flash_vs_31_pro.html)**
+
+**4. Tier Architectures: Gemini 2.5 Flash vs Gemini 2.5 Pro**
+*(Observe the performance boost of the Pro model in classical semantic symmetry and tone harmony)*
+```bash
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json benchmark_examples/compare_gemini25_flash_vs_pro.html
+```
+👉 **[Example Report: Gemini 2.5 Flash vs Gemini 2.5 Pro HTML Comparison Report](./benchmark_examples/compare_gemini25_flash_vs_pro.html)**
 
 ---
 

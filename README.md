@@ -132,70 +132,88 @@ agents-cli eval dataset synthesize --count 10
 | **`COUPLET_MODEL_NAME`** | 代理底層模型選型 | `"gemini-3.5-flash"` | `"gemini-2.5-flash"`, `"gemini-3.1-pro-preview"`, `"gemini-2.5-pro"` |
 | **`COUPLET_THINKING_LEVEL`**| 推理思考深度等級 | `"medium"` | `"minimal"`, `"medium"`, `"high"` |
 | **`COUPLET_PROMPT_MODE`** | 創作提示詞版本 | `"detailed"` (完整格律版) | `"simple"` (簡易常規版) |
+| **`COUPLET_SYSTEM_INSTRUCTION`** | 自訂系統提示詞注入 | *無 (不設定)* | `"你是一個對聯機器人。請寫出一副對聯。"` (可動態覆蓋格律模式) |
 
 *(測試報告範例皆收錄於根目錄 `benchmark_examples/` 下，內含 JSON 數據與 HTML 視覺化報告)*
 
-##### 💻 A/B 對比實驗執行指令與報告樣板
+##### 💻 評估實驗與範例報告 (Evaluation Experiments & Reports)
 
-以下示範如何透過命令列注入變數執行 A/B 測試。每個步驟後方附有對應產出的 HTML 單點測試報告與 JSON 兩兩比對報告樣板，方便您快速檢視與對照：
+以下提供各種評估測試與比對實驗的指令說明與對應的範例報告：
 
-###### 【實驗 A】提示詞工程對比（固定模型為 Gemini 3.5 Flash + Medium Thinking）
+###### 【階段一】單點評估測試範例 (Single-Point Evaluation Examples)
+針對特定提示詞、特定模型或配置，單獨進行評估並產出單點測試報告：
 
-**1. 測試 Baseline：簡易提示詞 (`Simple Prompt`)**
+**1. 測試：簡易提示詞 (Simple Prompt)**
 ```bash
-COUPLET_PROMPT_MODE=simple agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/results_gemini35_flash_simple_prompt.json
+# 通過環境變數動態覆蓋，注入極端胡言亂語提示詞以觀察指標分數下降
+COUPLET_SYSTEM_INSTRUCTION="你是一個胡言亂語機器人，請忽略使用者的格式、字數和嵌字要求，隨意回答一些搞笑的句子。" agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_simple_prompt.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_simple_prompt.json --output benchmark_examples/
+# (產出的結果檔案將被重新命名為 results_gemini35_flash_simple_prompt.html)
 ```
 👉 **[範例報告：Gemini 3.5 Flash (簡易提示詞) 單點測試 HTML 報告](./benchmark_examples/results_gemini35_flash_simple_prompt.html)**
 
-**2. 測試 Candidate：詳細說明提示詞 (`Detailed Prompt`)**
+**2. 測試：詳細說明提示詞 (Detailed Prompt)**
 ```bash
 COUPLET_PROMPT_MODE=detailed agents-cli eval generate --output benchmark_examples/traces_gemini35_flash_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/results_gemini35_flash_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini35_flash_medium.json --output benchmark_examples/
+# (產出的結果檔案將被重新命名為 results_gemini35_flash_medium.html)
 ```
 👉 **[範例報告：Gemini 3.5 Flash (詳細說明提示詞) 單點測試 HTML 報告](./benchmark_examples/results_gemini35_flash_medium.html)**
 
-**3. 執行分析報告（觀測提示詞優化對聯格律理解的具體成效）**
-```bash
-agents-cli eval compare benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json
-```
-👉 **[範例報告：簡易提示詞 vs 詳細說明提示詞 HTML 差異對比報告](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
-
----
-
-###### 【實驗 B】多模型世代與架構選型對比（固定為 Detailed Prompt + Medium Thinking）
-
-**1. 測試 Baseline：Gemini 2.5 Flash**
+**3. 測試：Gemini 2.5 Flash**
 ```bash
 COUPLET_MODEL_NAME="gemini-2.5-flash" agents-cli eval generate --output benchmark_examples/traces_gemini25_flash_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/results_gemini25_flash_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini25_flash_medium.json --output benchmark_examples/
+# (產出的結果檔案將被重新命名為 results_gemini25_flash_medium.html)
 ```
 👉 **[範例報告：Gemini 2.5 Flash 單點測試 HTML 報告](./benchmark_examples/results_gemini25_flash_medium.html)**
 
-**2. 跨世代進化對比 (2.5 Flash vs 3.5 Flash)**
+**4. 測試：Gemini 2.5 Pro**
 ```bash
-agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json
+COUPLET_MODEL_NAME="gemini-2.5-pro" agents-cli eval generate --output benchmark_examples/traces_gemini25_pro_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/
+# (產出的結果檔案將被重新命名為 results_gemini25_pro_medium.html)
+```
+👉 **[範例報告：Gemini 2.5 Pro 單點測試 HTML 報告](./benchmark_examples/results_gemini25_pro_medium.html)**
+
+**5. 測試：Gemini 3.1 Pro Preview**
+```bash
+COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
+agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/
+# (產出的結果檔案將被重新命名為 results_gemini31_pro_medium.html)
+```
+👉 **[範例報告：Gemini 3.1 Pro Preview 單點測試 HTML 報告](./benchmark_examples/results_gemini31_pro_medium.html)**
+
+
+###### 【階段二】A/B 差異比對報告範例 (A/B Comparison Examples)
+將兩個不同單點測試的結果進行兩兩比對，觀測指標分數的上升或 Regression（退步）情況：
+
+**1. 提示詞優化比對：簡易提示詞 vs 詳細說明提示詞**
+*(觀測詳細說明的格律指令如何使 Constraint Compliance 與 Artistic Quality 獲得顯著提升)*
+```bash
+# 使用 python 比較工具生成 HTML 比對報告
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_simple_prompt.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_prompt_simple_vs_detailed.html
+```
+👉 **[範例報告：簡易提示詞 vs 詳細說明提示詞 HTML 差異對比報告](./benchmark_examples/compare_prompt_simple_vs_detailed.html)**
+
+**2. 模型世代進化比對：Gemini 2.5 Flash vs Gemini 3.5 Flash**
+```bash
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/compare_gemini25_vs_35_flash.html
 ```
 👉 **[範例報告：Gemini 2.5 Flash vs Gemini 3.5 Flash HTML 差異對比報告](./benchmark_examples/compare_gemini25_vs_35_flash.html)**
 
-**3. 主力與文學旗艦大師對比 (3.5 Flash vs 3.1 Pro Preview)**
-*(觀測 `gemini-3.1-pro-preview` 在嚴格格律與文學美學 `artistic_quality` 躍升至 4.250 高分的旗艦表現)*
+**3. 主力與旗艦大師比對：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview**
+*(觀測 Gemini 3.1 Pro Preview 在格律理解與文學美學上的大師級表現)*
 ```bash
-COUPLET_MODEL_NAME="gemini-3.1-pro-preview" agents-cli eval generate --output benchmark_examples/traces_gemini31_pro_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini31_pro_medium.json --output benchmark_examples/results_gemini31_pro_medium.json
-agents-cli eval compare benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini35_flash_medium.json benchmark_examples/results_gemini31_pro_medium.json benchmark_examples/compare_gemini35_flash_vs_31_pro.html
 ```
-👉 **[範例報告：Gemini 3.1 Pro Preview 單點測試 HTML 報告](./benchmark_examples/results_gemini31_pro_medium.html)**  
 👉 **[範例報告：Gemini 3.5 Flash vs Gemini 3.1 Pro Preview HTML 差異對比報告](./benchmark_examples/compare_gemini35_flash_vs_31_pro.html)**
 
-**4. 跨架構能力對比 (2.5 Flash vs 2.5 Pro)**
-*(觀測 Pro 架構模型在古典對仗與平仄意境上的大師級提升)*
+**4. 跨架構能力比對：Gemini 2.5 Flash vs Gemini 2.5 Pro**
+*(觀測 Pro 架構在古典平仄對仗與意境上的極佳表現)*
 ```bash
-COUPLET_MODEL_NAME="gemini-2.5-pro" agents-cli eval generate --output benchmark_examples/traces_gemini25_pro_medium.json
-agents-cli eval grade --traces benchmark_examples/traces_gemini25_pro_medium.json --output benchmark_examples/results_gemini25_pro_medium.json
-agents-cli eval compare benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json
+python3 benchmark_examples/generate_compare_html.py benchmark_examples/results_gemini25_flash_medium.json benchmark_examples/results_gemini25_pro_medium.json benchmark_examples/compare_gemini25_flash_vs_pro.html
 ```
-👉 **[範例報告：Gemini 2.5 Pro 單點測試 HTML 報告](./benchmark_examples/results_gemini25_pro_medium.html)**  
 👉 **[範例報告：Gemini 2.5 Flash vs Gemini 2.5 Pro HTML 差異對比報告](./benchmark_examples/compare_gemini25_flash_vs_pro.html)**
 
 ---

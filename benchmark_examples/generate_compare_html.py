@@ -7,73 +7,63 @@ import sys
 import os
 from pathlib import Path
 
-def generate_html(json_path: str, html_path: str):
-    with open(json_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+def generate_html(base_path: str, cand_path: str, html_path: str):
+    with open(base_path, 'r', encoding='utf-8') as f:
+        base_data = json.load(f)
+    with open(cand_path, 'r', encoding='utf-8') as f:
+        cand_data = json.load(f)
 
-    # Resolve baseline and candidate names/versions
-    # We can infer them from file names or metadata if available
-    baseline_label = "Baseline (Old Version)"
-    candidate_label = "Candidate (New Version)"
-
-    # Look into metadata
-    diffs = data.get("differences", {})
-    metadata_diff = diffs.get("metadata.creation_timestamp", {})
-    # Default fallback
+    # Determine labels based on filenames
     base_meta = "Baseline"
     cand_meta = "Candidate"
     
-    # Try to find candidate name if present
-    eval_ds_diff = diffs.get("evaluation_dataset", {})
-    if eval_ds_diff:
-        base_ds_list = eval_ds_diff.get("baseline", [])
-        cand_ds_list = eval_ds_diff.get("candidate", [])
-        if base_ds_list:
-            base_meta = base_ds_list[0].get("candidate_name", "Baseline")
-        if cand_ds_list:
-            cand_meta = cand_ds_list[0].get("candidate_name", "Candidate")
+    # Try to find candidate name in dataset metadata
+    base_ds_list = base_data.get("evaluation_dataset", [])
+    if base_ds_list:
+        base_meta = base_ds_list[0].get("candidate_name", "Baseline")
+    cand_ds_list = cand_data.get("evaluation_dataset", [])
+    if cand_ds_list:
+        cand_meta = cand_ds_list[0].get("candidate_name", "Candidate")
 
-    # If the user is comparing prompts, let's look at config or names
-    if "compare_prompt" in json_path:
+    # If filename hints specific models/prompts
+    if "simple_prompt" in base_path:
         base_meta = "Simple Prompt"
-        cand_meta = "Detailed Prompt"
-    elif "compare_gemini25_vs_35_flash" in json_path:
-        base_meta = "Gemini 2.5 Flash"
-        cand_meta = "Gemini 3.5 Flash"
-    elif "compare_gemini35_flash_vs_31_pro" in json_path:
+    if "medium" in base_path and "gemini35" in base_path:
         base_meta = "Gemini 3.5 Flash"
-        cand_meta = "Gemini 3.1 Pro Preview"
-    elif "compare_gemini25_flash_vs_pro" in json_path:
+    if "gemini25_flash" in base_path:
         base_meta = "Gemini 2.5 Flash"
+    if "gemini31_pro" in base_path:
+        base_meta = "Gemini 3.1 Pro Preview"
+    if "gemini25_pro" in base_path:
+        base_meta = "Gemini 2.5 Pro"
+
+    if "simple_prompt" in cand_path:
+        cand_meta = "Simple Prompt"
+    if "medium" in cand_path and "gemini35" in cand_path:
+        cand_meta = "Gemini 3.5 Flash"
+    if "gemini25_flash" in cand_path:
+        cand_meta = "Gemini 2.5 Flash"
+    if "gemini31_pro" in cand_path:
+        cand_meta = "Gemini 3.1 Pro Preview"
+    if "gemini25_pro" in cand_path:
         cand_meta = "Gemini 2.5 Pro"
 
-    # Extract Summary Metrics Differences
-    # Format of summary_metrics in differences:
-    # {"baseline": [...], "candidate": [...]}
-    summary_diff = diffs.get("summary_metrics", {})
-    metrics_list = []
+    # Extract Summary Metrics
+    base_summary = base_data.get("summary_metrics", [])
+    cand_summary = cand_data.get("summary_metrics", [])
     
-    # We can build a dict of metric -> (base_mean, cand_mean)
     metrics_map = {}
-    if summary_diff:
-        base_metrics = summary_diff.get("baseline", [])
-        cand_metrics = summary_diff.get("candidate", [])
-        
-        # Each metric has structure: {"metric_name": "...", "mean_score": float, "stdev_score": float}
-        for m in base_metrics:
-            name = m.get("metric_name")
-            metrics_map[name] = {"base_mean": m.get("mean_score"), "base_stdev": m.get("stdev_score"), "cand_mean": None, "cand_stdev": None}
-        for m in cand_metrics:
-            name = m.get("metric_name")
-            if name not in metrics_map:
-                metrics_map[name] = {"base_mean": None, "base_stdev": None, "cand_mean": m.get("mean_score"), "cand_stdev": m.get("stdev_score")}
-            else:
-                metrics_map[name]["cand_mean"] = m.get("mean_score")
-                metrics_map[name]["cand_stdev"] = m.get("stdev_score")
+    for m in base_summary:
+        name = m.get("metric_name")
+        metrics_map[name] = {"base_mean": m.get("mean_score"), "base_stdev": m.get("stdev_score"), "cand_mean": None, "cand_stdev": None}
+    for m in cand_summary:
+        name = m.get("metric_name")
+        if name not in metrics_map:
+            metrics_map[name] = {"base_mean": None, "base_stdev": None, "cand_mean": m.get("mean_score"), "cand_stdev": m.get("stdev_score")}
+        else:
+            metrics_map[name]["cand_mean"] = m.get("mean_score")
+            metrics_map[name]["cand_stdev"] = m.get("stdev_score")
 
-    # If no metrics summary in differences, look at keys
-    # Or maybe it didn't change (unlikely, but just in case)
-    
     summary_table_html = ""
     for m_name, vals in metrics_map.items():
         base_val = vals["base_mean"]
@@ -107,25 +97,17 @@ def generate_html(json_path: str, html_path: str):
         </tr>
         """
 
-    # Extract case results
-    case_results_diff = diffs.get("eval_case_results", {})
-    base_cases = case_results_diff.get("baseline", [])
-    cand_cases = case_results_diff.get("candidate", [])
-    
-    # Extract datasets to get prompts and responses
-    # Structure of evaluation_dataset in differences:
-    # {"baseline": [ { "eval_cases": [ { "prompt": "...", "responses": ["..."] } ] } ], "candidate": ...}
-    base_ds = eval_ds_diff.get("baseline", [])
-    cand_ds = eval_ds_diff.get("candidate", [])
+    # Extract case results & dataset
+    base_cases = base_data.get("eval_case_results", [])
+    cand_cases = cand_data.get("eval_case_results", [])
     
     base_eval_cases = []
-    if base_ds:
-        base_eval_cases = base_ds[0].get("eval_cases", [])
+    if base_ds_list:
+        base_eval_cases = base_ds_list[0].get("eval_cases", [])
     cand_eval_cases = []
-    if cand_ds:
-        cand_eval_cases = cand_ds[0].get("eval_cases", [])
+    if cand_ds_list:
+        cand_eval_cases = cand_ds_list[0].get("eval_cases", [])
 
-    # Zip everything by index
     cases_html = ""
     num_cases = max(len(base_cases), len(cand_cases), len(base_eval_cases), len(cand_eval_cases))
     
@@ -144,9 +126,6 @@ def generate_html(json_path: str, html_path: str):
             if resps:
                 cand_resp = resps[0]
 
-        # Extract metric scores and explanations
-        # Format of metric_results:
-        # {"metric_name": {"score": float, "explanation": "..."}}
         base_metrics = {}
         if i < len(base_cases):
             c_res = base_cases[i].get("response_candidate_results", [])
@@ -159,10 +138,8 @@ def generate_html(json_path: str, html_path: str):
             if c_res:
                 cand_metrics = c_res[0].get("metric_results", {})
 
-        # Compute metric score comparisons
         all_metrics_keys = set(base_metrics.keys()) | set(cand_metrics.keys())
         metrics_comparison_html = ""
-        
         has_score_diff = False
         
         for m_name in sorted(all_metrics_keys):
@@ -511,7 +488,7 @@ def generate_html(json_path: str, html_path: str):
     print(f"Successfully generated visual HTML report: {html_path}")
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python3 generate_compare_html.py <compare_json_file> <output_html_file>")
+    if len(sys.argv) < 4:
+        print("Usage: python3 generate_compare_html.py <baseline_json_file> <candidate_json_file> <output_html_file>")
         sys.exit(1)
-    generate_html(sys.argv[1], sys.argv[2])
+    generate_html(sys.argv[1], sys.argv[2], sys.argv[3])
