@@ -7,6 +7,18 @@ import sys
 import os
 from pathlib import Path
 
+def extract_text(val):
+    if not val:
+        return ""
+    if isinstance(val, str):
+        return val
+    if isinstance(val, dict):
+        if "response" in val:
+            val = val["response"]
+        if "parts" in val and isinstance(val["parts"], list):
+            return "".join([part.get("text", "") for part in val["parts"] if isinstance(part, dict) and part.get("text")])
+    return str(val)
+
 def generate_html(base_path: str, cand_path: str, html_path: str):
     with open(base_path, 'r', encoding='utf-8') as f:
         base_data = json.load(f)
@@ -28,24 +40,30 @@ def generate_html(base_path: str, cand_path: str, html_path: str):
     # If filename hints specific models/prompts
     if "simple_prompt" in base_path:
         base_meta = "Simple Prompt"
-    if "medium" in base_path and "gemini35" in base_path:
-        base_meta = "Gemini 3.5 Flash"
-    if "gemini25_flash" in base_path:
+    elif "medium" in base_path and "gemini35" in base_path:
+        if "simple_prompt" in cand_path:
+            base_meta = "Detailed Prompt"
+        else:
+            base_meta = "Gemini 3.5 Flash"
+    elif "gemini25_flash" in base_path:
         base_meta = "Gemini 2.5 Flash"
-    if "gemini31_pro" in base_path:
+    elif "gemini31_pro" in base_path:
         base_meta = "Gemini 3.1 Pro Preview"
-    if "gemini25_pro" in base_path:
+    elif "gemini25_pro" in base_path:
         base_meta = "Gemini 2.5 Pro"
 
     if "simple_prompt" in cand_path:
         cand_meta = "Simple Prompt"
-    if "medium" in cand_path and "gemini35" in cand_path:
-        cand_meta = "Gemini 3.5 Flash"
-    if "gemini25_flash" in cand_path:
+    elif "medium" in cand_path and "gemini35" in cand_path:
+        if "simple_prompt" in base_path:
+            cand_meta = "Detailed Prompt"
+        else:
+            cand_meta = "Gemini 3.5 Flash"
+    elif "gemini25_flash" in cand_path:
         cand_meta = "Gemini 2.5 Flash"
-    if "gemini31_pro" in cand_path:
+    elif "gemini31_pro" in cand_path:
         cand_meta = "Gemini 3.1 Pro Preview"
-    if "gemini25_pro" in cand_path:
+    elif "gemini25_pro" in cand_path:
         cand_meta = "Gemini 2.5 Pro"
 
     # Extract Summary Metrics
@@ -117,14 +135,14 @@ def generate_html(base_path: str, cand_path: str, html_path: str):
         cand_resp = ""
         
         if i < len(base_eval_cases):
-            prompt = base_eval_cases[i].get("prompt", "")
+            prompt = extract_text(base_eval_cases[i].get("prompt", ""))
             resps = base_eval_cases[i].get("responses", [])
             if resps:
-                base_resp = resps[0]
+                base_resp = extract_text(resps[0])
         if i < len(cand_eval_cases):
             resps = cand_eval_cases[i].get("responses", [])
             if resps:
-                cand_resp = resps[0]
+                cand_resp = extract_text(resps[0])
 
         base_metrics = {}
         if i < len(base_cases):
